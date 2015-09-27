@@ -68,8 +68,15 @@ switch( $module ){
 			header('Content-type: Application/json');
 			echo json_encode( $app );
 			exit;
-		}elseif( $action = 'edit' ){
-			include_once( ACTION.'/admin_edit_application.php' );
+		}elseif( $action == 'edit' ){
+			if( $_SESSION['admin_id'] ){
+				include_once( ACTION.'/admin_edit_application.php' );
+			}else{
+				header('Location: /');
+				exit;
+			}
+		}elseif( $action == 'print' ){
+			include_once( ACTION.'/print_application.php' );
 		}
 		break;
 	default:
@@ -82,11 +89,15 @@ switch( $module ){
 		}
 }
 
-if( $_SESSION['student_id'] ){
-	include_once("views/layouts/student.php");
-}elseif( $_SESSION['admin_id'] ){
-	include_once("views/layouts/admin.php");
+if( $action == 'print' ){
+	include_once("views/layouts/print.php");
 }else{
-	include_once("views/layouts/main.php");
+	if( $_SESSION['student_id'] ){
+		include_once("views/layouts/student.php");
+	}elseif( $_SESSION['admin_id'] ){
+		include_once("views/layouts/admin.php");
+	}else{
+		include_once("views/layouts/main.php");
+	}
 }
 ?>

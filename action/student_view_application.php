@@ -21,11 +21,19 @@ $applications = Application::all( $_SESSION['student_id'] );
 	<div class="list-group">
 		<div class="list-group-item">
 			<div class="row">
-				<div class="col-md-1 col-md-1 col-xs-1">#</div>
-				<div class="col-md-4 col-md-4 col-xs-11">School</div>
-				<div class="col-md-2 col-md-2 col-xs-12">Status</div>
-				<div class="col-md-2 col-md-2 col-xs-6">Applied On</div>
-				<div class="col-md-2 col-md-2 col-xs-6">Updated On</div>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="row">
+						<div class="col-md-2 col-md-2 col-xs-1">#</div>
+						<div class="col-md-5 col-md-5 col-xs-11">School</div>
+						<div class="col-md-5 col-md-5 col-xs-12">Status</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="col-md-4 col-md-4 col-xs-6">Applied On</div>
+					<div class="col-md-4 col-md-4 col-xs-6">Updated On</div>
+					<div class="col-md-4 col-md-4 col-xs-12">&nbsp;</div>
+				</div>
+				
 			</div>
 		</div>
 	<?php
@@ -34,14 +42,25 @@ $applications = Application::all( $_SESSION['student_id'] );
 	?>
 		<div class="list-group-item">
 			<div class="row">
-				<div class="col-md-1 col-md-1 col-xs-1"><?php echo $i; ?></div>
-				<div class="col-md-4 col-md-4 col-xs-11">
-					<?php echo $application['school_name']; ?><br />
-					<small class="text-muted"><?php echo $application['subject_name']; ?></small>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="row">
+						<div class="col-md-2 col-md-2 col-xs-1"><?php echo $i; ?></div>
+						<div class="col-md-5 col-md-5 col-xs-11">
+							<?php echo $application['school_name']; ?><br />
+							<small class="text-muted"><?php echo $application['subject_name']; ?></small>
+						</div>
+						<div class="col-md-5 col-md-5 col-xs-12"><?php echo $application['app_status']; ?></div>
+					</div>
 				</div>
-				<div class="col-md-2 col-md-2 col-xs-12"><?php echo $application['app_status']; ?></div>
-				<div class="col-md-2 col-md-2 col-xs-6"><?php echo $application['date_added'] ?></div>
-				<div class="col-md-2 col-md-2 col-xs-6"><?php echo $application['date_updated'] ?></div>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="col-md-4 col-md-4 col-xs-6"><?php echo $application['date_added'] ?></div>
+					<div class="col-md-4 col-md-4 col-xs-6"><?php echo $application['date_updated'] ?></div>
+					<div class="col-md-4 col-md-4 col-xs-12">
+						<a href="index.php?module=application&action=print&id=<?php echo $application['id']; ?>" target="_blank">
+							<i class="fa fa-print"></i> Print
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	<?php
