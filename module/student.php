@@ -1,16 +1,22 @@
 <?php
 class Student{
 	
+	const MALE = 'M';
+	const FEMALE = 'F';
+	
 	public $id;
 	public $matric_no;
 	public $password;
 	public $programme;
-	public $faculty;
+	public $faculty=0;
 	public $full_name;
 	public $date_created;
+	public $gender;
+	public $dob;
+	public $race;
 	
 	public function register(){
-		$strSQL = "INSERT INTO student SET matric_no=:matric_no, password=:password, programme=:programme, faculty=:faculty, full_name=:full_name, date_created=:date_created";
+		$strSQL = "INSERT INTO student SET matric_no=:matric_no, password=:password, programme=:programme, faculty=:faculty, full_name=:full_name, date_created=:date_created, gender=:gender, dob=:dob, race=:race";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		
 		$row = $statement->execute(array(
@@ -19,7 +25,10 @@ class Student{
 			':programme' => $this->programme,
 			':faculty' => $this->faculty,
 			':full_name' => $this->full_name,
-			':date_created' => $this->date_created
+			':date_created' => $this->date_created,
+			':gender' => $this->gender,
+			':dob' => $this->dob,
+			':race' => $this->race
 		));
 		
 		if( $row ){
@@ -48,8 +57,9 @@ class Student{
 		$student->date_created = $row['date_created'];
 		$student->faculty_name = $row['faculty_name'];
 		$student->programme_name = $row['programme_name'];
-		
-		// var_dump( $row );
+		$student->gender = $row['gender'];
+		$student->dob = $row['dob'];
+		$student->race = $row['race'];
 		
 		return $student;
 	}
@@ -69,5 +79,15 @@ class Student{
 		}
 		return false;
 	}
+	
+	public static function races(){
+		return [
+			1 => 'Malay',
+			2 => 'Chinese',
+			3 => 'Indian',
+			4 => 'Other'
+		];
+	}
+	
 }
 ?>

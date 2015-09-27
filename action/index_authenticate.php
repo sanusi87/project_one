@@ -2,10 +2,11 @@
 ob_start();
 $faculties = Faculty::all();
 $programmes = Programme::all();
+$races = Student::races();
 ?>
 	
 	<div class="text-center">
-		<h1>xxx Application System</h1>
+		<h1><?php echo APPNAME; ?></h1>
 		<hr />
 	</div>
 	
@@ -77,10 +78,19 @@ $programmes = Programme::all();
 							<form action="index.php?module=student&action=register" class="form-horizontal" method="post">
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="studentname">Name</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<input type="text" class="form-control" name="studentname" id="studentname" placeholder="Name" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
 										<label for="username">Matric No.</label>
 									</div>
 									<div class="col-md-9 col-sm-9 col-xs-12">
-										<input type="text" class="form-control" name="username" placeholder="Matric No." />
+										<input type="text" class="form-control" name="username" id="username" placeholder="Matric No." />
 									</div>
 								</div>
 								
@@ -108,6 +118,7 @@ $programmes = Programme::all();
 									</div>
 								</div>
 								
+								<?php /* ?>
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
 										<label for="faculty">Faculty</label>
@@ -117,6 +128,50 @@ $programmes = Programme::all();
 											<?php
 											foreach( $faculties as $faculty ){
 												echo "<option value=\"$faculty[id]\">$faculty[long_name]</option>";
+											}
+											?>
+										</select>
+									</div>
+								</div><?php */ ?>
+								
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="username">Gender</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="row">
+											<div class="col-md-6 col-sm-6 col-sm-6">
+												<label for="gender_m">
+													<input type="radio" name="gender" value="<?php echo Student::MALE; ?>" id="gender_m" /> Male
+												</label>
+											</div>
+											<div class="col-md-6 col-sm-6 col-sm-6">
+												<label for="gender_f">
+													<input type="radio" name="gender" value="<?php echo Student::FEMALE; ?>" id="gender_f" /> Female
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="dob">Date of Birth</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<input type="date" class="form-control" name="dob" id="dob" readonly="readonly" placeholder="dd-mm-yyyy" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="race">Race</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<select name="race" id="race" class="form-control">
+											<?php
+											foreach( $races as $id => $race ){
+												echo "<option value=\"$id\">$race</option>";
 											}
 											?>
 										</select>
@@ -176,21 +231,33 @@ $programmes = Programme::all();
 
 <?php
 $content = ob_get_clean();
-
 View::addContent( $content );
+
+View::addStylesheet('<link rel="stylesheet" href="/assets/plugins/bootstrap-datepicker-1.4.0/css/bootstrap-datepicker3.standalone.min.css" />');
+View::addJavascript('<script type="text/javascript" src="/assets/plugins/bootstrap-datepicker-1.4.0/js/bootstrap-datepicker.min.js"></script>');
+
+$js = <<<JS
+<script type="text/javascript">
+jQuery(function($){
+	$('#dob').datepicker({
+		format: 'dd-mm-yyyy',
+	});
+JS;
 
 if( isset( $_SESSION['error'] ) ){
 	View::addStylesheet('<link rel="stylesheet" href="/assets/plugins/bootstrap-toastr/toastr.min.css" />');
+	
 	View::addJavascript('<script type="text/javascript" src="/assets/plugins/bootstrap-toastr/toastr.min.js"></script>');
 
-	$js = <<<JS
-	<script type="text/javascript">
-	jQuery(function($){
+	$js .= <<<JS
 		toastr.error('$_SESSION[error]', 'Error Notification');
-	});
-	</script>
 JS;
 	unset( $_SESSION['error'] );
-	View::addJavascript($js);
 }
+
+$js .= <<<JS
+});
+</script>
+JS;
+View::addJavascript($js);
 ?>

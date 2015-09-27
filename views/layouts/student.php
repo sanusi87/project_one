@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Project One</title>
+		<title><?php echo APPNAME; ?></title>
 		<link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 		<link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="/assets/css/style.css" rel="stylesheet" />
@@ -17,14 +17,21 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">xxx System</a>
+					<a class="navbar-brand" href="#"><?php echo APPNAME; ?></a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="index.php?module=student">All Applications</a></li>
 						<li><a href="index.php?module=student&action=new-application">Submit Application</a></li>
-						<li><a href="index.php?module=logout">Logout</a></li>
+						<li><a href="index.php?module=site&action=contact">Contact Us</a></li>
+						<li><a href="index.php?module=site&action=guide">User Guide</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="index.php?module=logout">
+								<span class="text-danger"><i class="fa fa-sign-out"></i> Logout</a></span>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -36,7 +43,7 @@
 		
 		<footer class="text-center" id="footer">
 			<hr />
-			<small class="text-muted">xxx Application System</small>
+			<small class="text-muted">&copy; <?php echo date('Y').'&nbsp;'. APPNAME; ?></small>
 		</footer>
 		
 		<script type="text/javascript" src="/assets/js/jquery-1.10.1.min.js"></script>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Project One</title>
+		<title><?php echo APPNAME; ?></title>
 		<link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 		<link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="/assets/css/style.css" rel="stylesheet" />
@@ -14,7 +14,7 @@
 		
 		<footer class="text-center" id="footer">
 			<hr />
-			<small class="text-muted">xxx Application System</small>
+			<small class="text-muted">&copy; <?php echo date('Y').'&nbsp;'. APPNAME; ?></small>
 		</footer>
 		
 		<script type="text/javascript" src="/assets/js/jquery-1.10.1.min.js"></script>

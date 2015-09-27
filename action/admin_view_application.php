@@ -48,6 +48,15 @@ $applications = Application::all();
 						<a class="btn btn-primary" href="index.php?module=admin&action=approve&id=<?php echo $application['id']; ?>">
 							<i class="fa fa-check"></i> Approve
 						</a>
+						
+						<?php /* ?><a class="btn btn-default" data-href="index.php?module=application&action=info&id=<?php echo $application['id']; ?>" href="#edit-application" data-toggle="modal">
+							<i class="fa fa-edit"></i> Edit
+						</a><?php */ ?>
+						
+						<a class="btn btn-default" href="index.php?module=application&action=edit&id=<?php echo $application['id']; ?>">
+							<i class="fa fa-edit"></i> Edit
+						</a>
+						
 						<a class="btn btn-danger" href="index.php?module=admin&action=reject&id=<?php echo $application['id']; ?>">
 							<i class="fa fa-ban"></i> Reject
 						</a>
@@ -81,6 +90,24 @@ $applications = Application::all();
 	<?php } ?>
 </div>
 
+<div class="modal" id="edit-application">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title">Edit Application</h4>
+			</div>
+			<div class="modal-body">
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <?php
 $content = ob_get_clean();
 View::addContent( $content );
@@ -89,14 +116,19 @@ View::addContent( $content );
 	// View::addStylesheet('<link rel="stylesheet" href="/assets/plugins/bootstrap-toastr/toastr.min.css" />');
 	// View::addJavascript('<script type="text/javascript" src="/assets/plugins/bootstrap-toastr/toastr.min.js"></script>');
 
-	// $js = <<<JS
-	// <script type="text/javascript">
-	// jQuery(function($){
-		// toastr.success('$_SESSION[success]', 'Success Notification');
-	// });
-	// </script>
-// JS;
+	$js = <<<JS
+	<script type="text/javascript">
+	jQuery(function($){
+		$('#edit-application').on('show.bs.modal', function(e){
+			var t = $(e.relatedTarget);
+			$.getJSON(t.attr('data-href'), function(resp){
+				
+			});
+		});
+	});
+	</script>
+JS;
 	// unset( $_SESSION['success'] );
-	// View::addJavascript($js);
+	View::addJavascript($js);
 // }
 ?>

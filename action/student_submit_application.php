@@ -14,7 +14,6 @@ if( isset( $_POST ) && !empty( $_POST ) ){
 	}
 }
 
-
 ob_start();
 $student = Student::findById( $_SESSION['student_id'] );
 $schools = School::all();
@@ -64,14 +63,14 @@ $application = Application::all( $_SESSION['student_id'], array('status' => 1) )
 			</div>
 		</div>
 		
-		<div class="form-group">
+		<?php /* ?><div class="form-group">
 			<div class="col-md-3 col-sm-3 col-xs-12">
 				<label for="faculty">Faculty</label>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12">
 				<input type="text" class="form-control" value="<?php echo $student->faculty_name; ?>" name="faculty" readonly="readonly" />
 			</div>
-		</div>
+		</div><?php */ ?>
 		
 		<h3>School Record</h3>
 		<hr />

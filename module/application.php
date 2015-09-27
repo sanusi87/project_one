@@ -57,6 +57,20 @@ class Application{
 		return $result;
 	}
 	
+	public function update(){
+		$strSQL = "UPDATE application SET student_id=:student, school_id=:school, subject_id=:subject, date_updated=:date_updated, status=:status WHERE id=:id";
+		$statement = DbConn::$dbConn->prepare( $strSQL );
+		$result = $statement->execute(array(
+			':id' => $this->id,
+			':student' => $this->student_id,
+			':school' => $this->school_id,
+			':subject' => $this->subject_id,
+			':status' => $this->status,
+			':date_updated' => date('Y-m-d H:i:s')
+		));
+		return $result;
+	}
+	
 	public static function findById( $id ){
 		$strSQL = "SELECT application.* FROM application WHERE id=:id";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
@@ -82,6 +96,18 @@ class Application{
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		$result = $statement->execute( array( ':status' => $this->status, ':id' => $this->id ) );
 		return $result;
+	}
+	
+	public static function statuses(){
+		$strSQL = "SELECT * FROM application_status";
+		$statement = DbConn::$dbConn->query( $strSQL );
+		$statuses = [];
+		
+		while( $row = $statement->fetch(PDO::FETCH_ASSOC) ){
+			$statuses[] = $row;
+		}
+		
+		return $statuses;
 	}
 	
 }

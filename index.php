@@ -1,6 +1,6 @@
 <?php
 define( "ACTION", "action" );
-
+define( "APPNAME", "Project One" );
 include_once("autoload.php");
 
 new DbConn();
@@ -31,7 +31,6 @@ switch( $module ){
 			include_once( ACTION.'/student_view_application.php' );
 		}
 		break;
-		
 	case 'admin':
 		if( $action == 'login' ){
 			include_once( ACTION.'/admin_login.php' );
@@ -39,6 +38,8 @@ switch( $module ){
 			include_once( ACTION.'/admin_process_application.php' );
 		}elseif( $action == 'reject' ){
 			include_once( ACTION.'/admin_process_application.php' );
+		}elseif( $action == 'edit-application' ){
+			// update application
 		}else{
 			include_once( ACTION.'/admin_view_application.php' );
 		}
@@ -57,6 +58,20 @@ switch( $module ){
 		
 		header('Location: /');
 		exit;
+	case 'site':
+		include_once( ACTION."/$module"."_".$action.".php" );
+		break;
+	case 'application':
+		if( $action == 'info' ){
+			// get application info
+			$app = Application::findById( $_GET['id'] );
+			header('Content-type: Application/json');
+			echo json_encode( $app );
+			exit;
+		}elseif( $action = 'edit' ){
+			include_once( ACTION.'/admin_edit_application.php' );
+		}
+		break;
 	default:
 		if( $_SESSION['student_id'] ){
 			include_once( ACTION.'/student_view_application.php' );
