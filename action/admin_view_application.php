@@ -77,7 +77,9 @@ $applications = Application::all();
 							}
 						}
 					?>
-						
+						<a class="btn btn-default" href="index.php?module=application&action=print&id=<?php echo $application['id']; ?>" target="_blank">
+							<i class="fa fa-print"></i> Print
+						</a>
 					</div>
 				</div>
 			</div>

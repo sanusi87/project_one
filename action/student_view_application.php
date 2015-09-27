@@ -56,7 +56,7 @@ $applications = Application::all( $_SESSION['student_id'] );
 					<div class="col-md-4 col-md-4 col-xs-6"><?php echo $application['date_added'] ?></div>
 					<div class="col-md-4 col-md-4 col-xs-6"><?php echo $application['date_updated'] ?></div>
 					<div class="col-md-4 col-md-4 col-xs-12">
-						<a href="index.php?module=application&action=print&id=<?php echo $application['id']; ?>" target="_blank">
+						<a class="btn btn-default btn-sm" href="index.php?module=application&action=print&id=<?php echo $application['id']; ?>" target="_blank">
 							<i class="fa fa-print"></i> Print
 						</a>
 					</div>

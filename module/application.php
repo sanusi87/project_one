@@ -91,6 +91,18 @@ class Application{
 		return false;
 	}
 	
+	public static function isMyApplication( $id ){
+		$strSQL = "SELECT 1 FROM application WHERE id=:id AND student_id=:student_id";
+		$statement = DbConn::$dbConn->prepare( $strSQL );
+		$result = $statement->execute( array( ':id' => $id, ':student_id' => $_SESSION['student_id'] ) );
+		$row = $statement->fetch( PDO::FETCH_ASSOC );
+		
+		if( is_array( $row ) && count( $row ) == 1 ){
+			return true;
+		}
+		return false;
+	}
+	
 	public function processApplication(){
 		$strSQL = "UPDATE application SET status=:status WHERE id=:id";
 		$statement = DbConn::$dbConn->prepare( $strSQL );

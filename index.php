@@ -76,6 +76,13 @@ switch( $module ){
 				exit;
 			}
 		}elseif( $action == 'print' ){
+			// var_dump( Application::isMyApplication( $_GET['id'] ) );
+			if( $_SESSION['student_id'] ){
+				if( !Application::isMyApplication( $_GET['id'] ) ){
+					header('Location: /');
+					exit;
+				}
+			}
 			include_once( ACTION.'/print_application.php' );
 		}
 		break;
