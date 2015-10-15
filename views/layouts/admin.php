@@ -40,7 +40,7 @@
 		
 		<footer class="text-center" id="footer">
 			<hr />
-			<small class="text-muted">&copy; <?php echo date('Y').'&nbsp;'. APPNAME; ?></small>
+			<small class="text-muted">Copyright &copy; <?php echo date('Y'); ?>. All Rights Reserved.</small>
 		</footer>
 		
 		<script type="text/javascript" src="/assets/js/jquery-1.10.1.min.js"></script>

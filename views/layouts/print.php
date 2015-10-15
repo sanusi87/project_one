@@ -14,7 +14,7 @@
 		
 		<footer class="text-center" id="footer">
 			<hr />
-			<small class="text-muted">&copy; <?php echo date('Y').'&nbsp;'. APPNAME; ?></small>
+			<small class="text-muted">Copyright &copy; <?php echo date('Y'); ?>. All Rights Reserved.</small>
 		</footer>
 	</body>
 </html>
