@@ -3,7 +3,7 @@ class Programme{
 	
 	public static function all(){
 		$programmes = array();
-		$strSQL = "SELECT * FROM programme ORDER BY long_name DESC";
+		$strSQL = "SELECT * FROM program_major ORDER BY nama_panjang DESC";
 		$statement = DbConn::$dbConn->query( $strSQL );
 		$statement->execute();
 		

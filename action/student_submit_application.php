@@ -1,9 +1,9 @@
 <?php
 if( isset( $_POST ) && !empty( $_POST ) ){
 	$application = new Application();
-	$application->student_id = (int)$_POST['student_id'];
-	$application->school_id = (int)$_POST['school'];
-	$application->subject_id = (int)$_POST['subject'];
+	$application->id_pelajar = (int)$_POST['id_pelajar'];
+	$application->id_sekolah = (int)$_POST['sekolah'];
+	$application->id_subjek = (int)$_POST['subjek'];
 	
 	if( $application->submit() ){
 		$_SESSION['success'] = 'Application submitted!';
@@ -15,9 +15,9 @@ if( isset( $_POST ) && !empty( $_POST ) ){
 }
 
 ob_start();
-$student = Student::findById( $_SESSION['student_id'] );
-$schools = School::all();
-$application = Application::all( $_SESSION['student_id'], array('status' => 1) );
+$pelajar = Student::findById( $_SESSION['id_pelajar'] );
+$sekolahs = School::all();
+$application = Application::all( $_SESSION['id_pelajar'], array('status' => 1) );
 ?>
 
 <div>
@@ -33,33 +33,33 @@ $application = Application::all( $_SESSION['student_id'], array('status' => 1) )
 	<?php } ?>
 	
 	<form action="" class="form-horizontal" method="post" id="application-form">
-		<input type="hidden" name="student_id" value="<?php echo $student->id; ?>" />
+		<input type="hidden" name="id_pelajar" value="<?php echo $pelajar->id; ?>" />
 		<h3>Student Record</h3>
 		<hr />
 		<div class="form-group">
 			<div class="col-md-3 col-sm-3 col-xs-12">
-				<label for="matric_no">Matric No.</label>
+				<label for="no_matrik">Matric No.</label>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12">
-				<input type="text" class="form-control" value="<?php echo $student->matric_no; ?>" name="matric_no" readonly="readonly" />
+				<input type="text" class="form-control" value="<?php echo $pelajar->no_matrik; ?>" name="no_matrik" readonly/>
+			</div>
+		</div>
+		 
+		<div class="form-group">
+			<div class="col-md-3 col-sm-3 col-xs-12">
+				<label for="nama_penuh">Nama Penuh</label>
+			</div>
+			<div class="col-md-9 col-sm-9 col-xs-12">
+				<input type="text" class="form-control" value="<?php echo $pelajar->nama_penuh; ?>" name="nama_penuh" readonly />
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<div class="col-md-3 col-sm-3 col-xs-12">
-				<label for="full_name">Full Name</label>
+				<label for="program_major">Program</label>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12">
-				<input type="text" class="form-control" value="<?php echo $student->full_name; ?>" name="full_name" readonly="readonly" />
-			</div>
-		</div>
-		
-		<div class="form-group">
-			<div class="col-md-3 col-sm-3 col-xs-12">
-				<label for="programme">Programme</label>
-			</div>
-			<div class="col-md-9 col-sm-9 col-xs-12">
-				<input type="text" class="form-control" value="<?php echo $student->programme_name; ?>" name="programme" readonly="readonly" />
+				<input type="text" class="form-control" value="<?php echo $pelajar->nama_program; ?>" name="program_major" readonly />
 			</div>
 		</div>
 		
@@ -72,22 +72,22 @@ $application = Application::all( $_SESSION['student_id'], array('status' => 1) )
 			</div>
 		</div><?php */ ?>
 		
-		<h3>School Record</h3>
+		<h3>Sekolah</h3>
 		<hr />
 		
 		<div class="form-group">
 			<div class="col-md-3 col-sm-3 col-xs-12">
-				<label for="school">School</label>
+				<label for="sekolah">Sekolah</label>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12">
-				<select name="school" id="school" class="form-control">
-					<option value="">-- select --</option>
+				<select name="sekolah" id="sekolah" class="form-control">
+					<option value="">-- sila pilih --</option>
 				<?php
-				foreach( $schools as $school ){
+				foreach( $sekolahs as $sekolah ){
 					// if( !empty( $school['application_id'] ) ){
 						// echo "<option value=\"$school[id]\" disabled=\"disabled\">$school[name]</option>";
 					// }else{
-						echo "<option value=\"$school[id]\">$school[name]</option>";
+						echo "<option value=\"$sekolah[id]\">$sekolah[nama]</option>";
 					// }
 				}
 				?>
@@ -97,10 +97,10 @@ $application = Application::all( $_SESSION['student_id'], array('status' => 1) )
 		
 		<div class="form-group">
 			<div class="col-md-3 col-sm-3 col-xs-12">
-				<label for="subject">Subject</label>
+				<label for="subjek">Subjek</label>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12">
-				<select name="subject" id="subject" class="form-control"></select>
+				<select name="subjek" id="subjek" class="form-control"></select>
 			</div>
 		</div>
 		<?php if( count( $application ) == 0 ){ ?>
@@ -124,12 +124,12 @@ $js = <<<JS
 		$('#application-form').submit(function(){
 			var errors = [];
 			
-			if( $('#school').val() == '' ){
-				errors.push('Please select a school!');
+			if( $('#sekolah').val() == '' ){
+				errors.push('Please select a sekolah!');
 			}
 			
-			if( $('#subject').val() == '' ){
-				errors.push('Please select a subject!');
+			if( $('#subjek').val() == '' ){
+				errors.push('Please select a subjek!');
 			}
 			
 			if( errors.length > 0 ){
@@ -140,12 +140,12 @@ $js = <<<JS
 			}
 		});
 		
-		$('#school').change(function(){
+		$('#sekolah').change(function(){
 			var t = $(this).val();
 			$.getJSON('index.php?module=subject&action=load&school='+t, function(resp){
-				$('#subject').empty();
+				$('#subjek').empty();
 				$.each(resp, function(i,e){
-					$('#subject').append('<option value="'+e.id+'">'+e.name+'</option>');
+					$('#subjek').append('<option value="'+e.id+'">'+e.name+'</option>');
 				});
 			});
 		});

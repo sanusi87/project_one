@@ -22,9 +22,9 @@ $applications = Application::all();
 		<div class="list-group-item">
 			<div class="row">
 				<div class="col-md-1 col-md-1 col-xs-1">#</div>
-				<div class="col-md-4 col-md-4 col-xs-11">School</div>
-				<div class="col-md-2 col-md-2 col-xs-6">Applied On</div>
-				<div class="col-md-2 col-md-2 col-xs-6">Updated On</div>
+				<div class="col-md-4 col-md-4 col-xs-11">Sekolah</div>
+				<div class="col-md-2 col-md-2 col-xs-6">Tarikh Permohonan</div>
+				<div class="col-md-2 col-md-2 col-xs-6">Kemaskini</div>
 				<div class="col-md-3 col-md-3 col-xs-12">Action</div>
 			</div>
 		</div>
@@ -36,12 +36,12 @@ $applications = Application::all();
 			<div class="row">
 				<div class="col-md-1 col-md-1 col-xs-1"><?php echo $i; ?></div>
 				<div class="col-md-4 col-md-4 col-xs-11">
-					<strong><?php echo empty( $application['full_name'] ) ? $application['matric_no'] : $application['full_name']; ?></strong><br />
-					<small><?php echo $application['school_name']; ?></small><br />
-					<small><small class="text-muted"><?php echo $application['subject_name']; ?></small></small>
+					<strong><?php echo empty( $application['nama_penuh'] ) ? $application['no_matrik'] : $application['nama_penuh']; ?></strong><br />
+					<small><?php echo $application['nama_sekolah']; ?></small><br />
+					<small><small class="text-muted"><?php echo $application['nama_subjek']; ?></small></small>
 				</div>
-				<div class="col-md-2 col-md-2 col-xs-6"><?php echo $application['date_added'] ?></div>
-				<div class="col-md-2 col-md-2 col-xs-6"><?php echo $application['date_updated'] ?></div>
+				<div class="col-md-2 col-md-2 col-xs-6"><?php echo $application['tarikh_dibuat'] ?></div>
+				<div class="col-md-2 col-md-2 col-xs-6"><?php echo $application['tarikh_kemaskini'] ?></div>
 				<div class="col-md-3 col-md-3 col-xs-12">
 					<div class="btn btn-group btn-group-xs">
 					<?php if( $application['status'] == 1 ){ ?>

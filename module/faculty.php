@@ -3,7 +3,7 @@ class Faculty{
 	
 	public static function all(){
 		$faculties = array();
-		$strSQL = "SELECT * FROM faculty ORDER BY long_name DESC";
+		$strSQL = "SELECT * FROM fakulti ORDER BY nama_panjang DESC";
 		$statement = DbConn::$dbConn->query( $strSQL );
 		$statement->execute();
 		

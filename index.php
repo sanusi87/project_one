@@ -1,6 +1,6 @@
 <?php
 define( "ACTION", "action" );
-define( "APPNAME", "Project One" );
+define( "APPNAME", "e-SPLM" );
 include_once("autoload.php");
 
 new DbConn();
@@ -9,15 +9,15 @@ session_start();
 $module = $_GET['module'];
 $action = $_GET['action'];
 
-if( !isset( $_SESSION['student_id'] ) && !isset( $_SESSION['admin_id'] ) ){
+if( !isset( $_SESSION['id_pelajar'] ) && !isset( $_SESSION['id_admin'] ) ){
 	if( empty( $_POST ) ){
 		$module = null;
 	}
 }
 // var_dump( $module );
 // var_dump( $action );
-// var_dump( $_SESSION['student_id'] );
-// var_dump( $_SESSION['admin_id'] );
+// var_dump( $_SESSION['id_pelajar'] );
+// var_dump( $_SESSION['id_admin'] );
 
 switch( $module ){
 	case 'student':
@@ -44,17 +44,17 @@ switch( $module ){
 			include_once( ACTION.'/admin_view_application.php' );
 		}
 		break;
-	case 'subject':
+	case 'subjek':
 		if( $action == 'load' ){
-			$school = (int)$_GET['school'];
+			$sekolah = (int)$_GET['sekolah'];
 			header('Content-type: Application/json');
-			echo json_encode( Subject::ofSchool( $school ) );
+			echo json_encode( Subject::ofSchool( $sekolah ) );
 			exit;
 		}
 		break;
 	case 'logout':
-		unset( $_SESSION['student_id'] );
-		unset( $_SESSION['admin_id'] );
+		unset( $_SESSION['id_pelajar'] );
+		unset( $_SESSION['id_admin'] );
 		
 		header('Location: /');
 		exit;
@@ -69,7 +69,7 @@ switch( $module ){
 			echo json_encode( $app );
 			exit;
 		}elseif( $action == 'edit' ){
-			if( $_SESSION['admin_id'] ){
+			if( $_SESSION['id_admin'] ){
 				include_once( ACTION.'/admin_edit_application.php' );
 			}else{
 				header('Location: /');
@@ -77,7 +77,7 @@ switch( $module ){
 			}
 		}elseif( $action == 'print' ){
 			// var_dump( Application::isMyApplication( $_GET['id'] ) );
-			if( $_SESSION['student_id'] ){
+			if( $_SESSION['id_pelajar'] ){
 				if( !Application::isMyApplication( $_GET['id'] ) ){
 					header('Location: /');
 					exit;
@@ -87,9 +87,9 @@ switch( $module ){
 		}
 		break;
 	default:
-		if( $_SESSION['student_id'] ){
+		if( $_SESSION['id_pelajar'] ){
 			include_once( ACTION.'/student_view_application.php' );
-		}elseif( $_SESSION['admin_id'] ){
+		}elseif( $_SESSION['id_admin'] ){
 			include_once( ACTION.'/admin_view_application.php' );
 		}else{
 			include_once(ACTION."/index_authenticate.php");
@@ -99,9 +99,9 @@ switch( $module ){
 if( $action == 'print' ){
 	include_once("views/layouts/print.php");
 }else{
-	if( $_SESSION['student_id'] ){
+	if( $_SESSION['id_pelajar'] ){
 		include_once("views/layouts/student.php");
-	}elseif( $_SESSION['admin_id'] ){
+	}elseif( $_SESSION['id_admin'] ){
 		include_once("views/layouts/admin.php");
 	}else{
 		include_once("views/layouts/main.php");

@@ -2,35 +2,35 @@
 class Application{
 	
 	public $id;
-	public $student_id;
-	public $school_id;
-	public $subject_id;
+	public $id_pelajar;
+	public $id_sekolah;
+	public $id_subjek;
 	public $status;
-	public $date_added;
-	public $date_updated;
+	public $tarikh_dibuat;
+	public $tarikh_kemaskini;
 	
-	public static function all( $student=null, $filter=array() ){
+	public static function all( $pelajar=null, $filter=array() ){
 		
 		$param = array();
 		
-		$strSQL = "SELECT application.*, application_status.name as app_status, school.name as school_name, subject.name as subject_name, student.full_name, student.matric_no
-		FROM application 
-		INNER JOIN application_status ON application_status.id = application.status 
-		INNER JOIN school ON school.id = application.school_id 
-		INNER JOIN subject ON subject.id = application.subject_id 
-		INNER JOIN student ON student.id = application.student_id 
+		$strSQL = "SELECT permohonan.*, status_permohonan.nama as status_mohon, sekolah.nama as nama_sekolah, subjek.nama as nama_subjek, pelajar.nama_penuh, pelajar.no_matrik
+		FROM permohonan 
+		INNER JOIN status_permohonan ON status_permohonan.id = permohonan.status 
+		INNER JOIN sekolah ON sekolah.id = permohonan.id_sekolah 
+		INNER JOIN subjek ON subjek.id = permohonan.id_subjek 
+		INNER JOIN pelajar ON pelajar.id = permohonan.id_pelajar 
 		WHERE 1=1";
 		
-		if( !empty( $student ) ){
-			$strSQL .= " AND student_id=:student_id";
-			$param[':student_id'] = $student;
+		if( !empty( $pelajar ) ){
+			$strSQL .= " AND id_pelajar=:id_pelajar";
+			$param[':id_pelajar'] = $pelajar;
 		}else{
 			
 		}
 		
 		if( !empty( $filter ) ){
 			if( !empty( $filter['status'] ) ){
-				$strSQL .= " AND application.status=:status";
+				$strSQL .= " AND permohonan.status=:status";
 				$param[':status'] = $filter['status'];
 			}
 		}
@@ -46,45 +46,45 @@ class Application{
 	}
 	
 	public function submit(){
-		$strSQL = "INSERT INTO application SET student_id=:student, school_id=:school, subject_id=:subject, status=1, date_added=:date_added";
+		$strSQL = "INSERT INTO permohonan SET id_pelajar=:pelajar, id_sekolah=:sekolah, id_subjek=:subjek, status=1, tarikh_dibuat=:tarikh_dibuat";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		$result = $statement->execute(array(
-			':student' => $this->student_id,
-			':school' => $this->school_id,
-			':subject' => $this->subject_id,
-			':date_added' => date('Y-m-d H:i:s')
+			':pelajar' => $this->id_pelajar,
+			':sekolah' => $this->id_sekolah,
+			':subjek' => $this->id_subjek,
+			':tarikh_dibuat' => date('Y-m-d H:i:s')
 		));
 		return $result;
 	}
 	
 	public function update(){
-		$strSQL = "UPDATE application SET student_id=:student, school_id=:school, subject_id=:subject, date_updated=:date_updated, status=:status WHERE id=:id";
+		$strSQL = "UPDATE application SET id_pelajar=:pelajar, id_sekolah=:sekolah, id_subjek=:subjek, tarikh_kemaskini=:tarikh_kemaskini, status=:status WHERE id=:id";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		$result = $statement->execute(array(
 			':id' => $this->id,
-			':student' => $this->student_id,
-			':school' => $this->school_id,
-			':subject' => $this->subject_id,
+			':pelajar' => $this->id_pelajar,
+			':sekolah' => $this->id_sekolah,
+			':subjek' => $this->id_subjek,
 			':status' => $this->status,
-			':date_updated' => date('Y-m-d H:i:s')
+			':tarikh_kemaskini' => date('Y-m-d H:i:s')
 		));
 		return $result;
 	}
 	
 	public static function findById( $id ){
-		$strSQL = "SELECT application.* FROM application WHERE id=:id";
+		$strSQL = "SELECT permohonan.* FROM permohonan WHERE id=:id";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		$result = $statement->execute( array( ':id' => $id ) );
 		$row = $statement->fetch( PDO::FETCH_ASSOC );
 		if( !empty( $row['id'] ) ){
 			$app = new self;
 			$app->id = $row['id'];
-			$app->student_id = $row['student_id'];
-			$app->school_id = $row['school_id'];
-			$app->subject_id = $row['subject_id'];
+			$app->id_pelajar = $row['id_pelajar'];
+			$app->id_sekolah = $row['id_sekolah'];
+			$app->id_subjek = $row['id_subjek'];
 			$app->status = $row['status'];
-			$app->date_added = $row['date_added'];
-			$app->date_updated = $row['date_updated'];
+			$app->tarikh_dibuat = $row['tarikh_dibuat'];
+			$app->tarikh_kemaskini = $row['tarikh_kemaskini'];
 			
 			return $app;
 		}
@@ -92,9 +92,9 @@ class Application{
 	}
 	
 	public static function isMyApplication( $id ){
-		$strSQL = "SELECT 1 FROM application WHERE id=:id AND student_id=:student_id";
+		$strSQL = "SELECT 1 FROM permohonan WHERE id=:id AND id_pelajar=:id_pelajar";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
-		$result = $statement->execute( array( ':id' => $id, ':student_id' => $_SESSION['student_id'] ) );
+		$result = $statement->execute( array( ':id' => $id, ':id_pelajar' => $_SESSION['id_pelajar'] ) );
 		$row = $statement->fetch( PDO::FETCH_ASSOC );
 		
 		if( is_array( $row ) && count( $row ) == 1 ){
@@ -104,14 +104,14 @@ class Application{
 	}
 	
 	public function processApplication(){
-		$strSQL = "UPDATE application SET status=:status WHERE id=:id";
+		$strSQL = "UPDATE permohonan SET status=:status WHERE id=:id";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		$result = $statement->execute( array( ':status' => $this->status, ':id' => $this->id ) );
 		return $result;
 	}
 	
 	public static function statuses(){
-		$strSQL = "SELECT * FROM application_status";
+		$strSQL = "SELECT * FROM status_permohonan";
 		$statement = DbConn::$dbConn->query( $strSQL );
 		$statuses = [];
 		
