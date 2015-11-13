@@ -1,0 +1,12 @@
+[Fri Jul 17 19:47:22 2015] [error] [client 127.0.0.1] client denied by server configuration: C:/www
+[Fri Jul 17 19:47:22 2015] [error] [client 127.0.0.1] client denied by server configuration: C:/www, referer: http://projectone.dev/
+[Fri Jul 17 19:47:31 2015] [error] [client 127.0.0.1] client denied by server configuration: C:/www
+[Fri Jul 17 19:47:31 2015] [error] [client 127.0.0.1] client denied by server configuration: C:/www, referer: http://projectone.dev/index.php
+[Fri Jul 17 19:48:14 2015] [error] [client 127.0.0.1] client denied by server configuration: C:/www
+[Fri Jul 17 19:48:15 2015] [error] [client 127.0.0.1] client denied by server configuration: C:/www, referer: http://projectone.dev/index.php
+[Fri Jul 17 19:49:58 2015] [error] [client 127.0.0.1] File does not exist: C:/xampp/htdocs/project_one/favicon.ico, referer: http://projectone.dev/index.php
+[Sat Jul 18 09:02:35 2015] [error] [client 127.0.0.1] File does not exist: C:/xampp/htdocs/project_one/favicon.ico, referer: http://projectone.dev/
+[Sat Jul 18 17:11:44 2015] [error] [client 127.0.0.1] File does not exist: C:/xampp/htdocs/project_one/favicon.ico, referer: http://projectone.dev/
+[Sun Jul 19 21:00:35 2015] [error] [client 127.0.0.1] File does not exist: C:/xampp/htdocs/project_one/favicon.ico, referer: http://projectone.dev/
+[Sun Jul 19 22:04:17 2015] [error] [client 127.0.0.1] File does not exist: C:/xampp/htdocs/project_one/favicon.ico, referer: http://projectone.dev/index.php?module=student&action=new-application
+[Mon Aug 03 11:46:33 2015] [error] [client 127.0.0.1] File does not exist: C:/xampp/htdocs/project_one/favicon.ico, referer: http://projectone.dev/

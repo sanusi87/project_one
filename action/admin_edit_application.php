@@ -9,11 +9,11 @@ if( isset( $_POST ) && !empty( $_POST ) ){
 	$application->status = (int)$_POST['status'];
 	
 	if( $application->update() ){
-		$_SESSION['success'] = 'Application submitted!';
+		$_SESSION['success'] = 'Application updated!';
 		header('Location: index.php?module=admin');
 		exit;
 	}else{
-		$_SESSION['error'] = 'Application failed!';
+		$_SESSION['error'] = 'Failed to update application!';
 	}
 }
 
@@ -173,10 +173,10 @@ $js = <<<JS
 		
 		$('#sekolah').change(function(){
 			var t = $(this).val();
-			$.getJSON('index.php?module=subject&action=load&school='+t, function(resp){
+			$.getJSON('index.php?module=subjek&action=load&sekolah='+t, function(resp){
 				$('#subjek').empty();
 				$.each(resp, function(i,e){
-					$('#subjek').append('<option value="'+e.id+'">'+e.name+'</option>');
+					$('#subjek').append('<option value="'+e.id+'">'+e.nama+'</option>');
 				});
 			});
 		});

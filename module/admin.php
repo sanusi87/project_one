@@ -14,7 +14,7 @@ class Admin{
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
 		
 		if( count( $row ) > 0 ){
-			$_SESSION['admin_id'] = $row['id'];
+			$_SESSION['id_admin'] = $row['id'];
 			return true;
 		}
 		return false;
