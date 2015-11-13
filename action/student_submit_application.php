@@ -142,10 +142,10 @@ $js = <<<JS
 		
 		$('#sekolah').change(function(){
 			var t = $(this).val();
-			$.getJSON('index.php?module=subjek&action=load&sekolah='+t, function(resp){
+			$.getJSON('index.php?module=subject&action=load&school='+t, function(resp){
 				$('#subjek').empty();
 				$.each(resp, function(i,e){
-					$('#subjek').append('<option value="'+e.id+'">'+e.nama+'</option>');
+					$('#subjek').append('<option value="'+e.id+'">'+e.name+'</option>');
 				});
 			});
 		});

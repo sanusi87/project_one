@@ -58,7 +58,7 @@ class Application{
 	}
 	
 	public function update(){
-		$strSQL = "UPDATE permohonan SET id_pelajar=:pelajar, id_sekolah=:sekolah, id_subjek=:subjek, tarikh_kemaskini=:tarikh_kemaskini, status=:status WHERE id=:id";
+		$strSQL = "UPDATE application SET id_pelajar=:pelajar, id_sekolah=:sekolah, id_subjek=:subjek, tarikh_kemaskini=:tarikh_kemaskini, status=:status WHERE id=:id";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		$result = $statement->execute(array(
 			':id' => $this->id,

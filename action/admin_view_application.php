@@ -114,18 +114,23 @@ $applications = Application::all();
 $content = ob_get_clean();
 View::addContent( $content );
 
-if( isset( $_SESSION['success'] ) ){
-	View::addStylesheet('<link rel="stylesheet" href="/assets/plugins/bootstrap-toastr/toastr.min.css" />');
-	View::addJavascript('<script type="text/javascript" src="/assets/plugins/bootstrap-toastr/toastr.min.js"></script>');
+// if( isset( $_SESSION['success'] ) ){
+	// View::addStylesheet('<link rel="stylesheet" href="/assets/plugins/bootstrap-toastr/toastr.min.css" />');
+	// View::addJavascript('<script type="text/javascript" src="/assets/plugins/bootstrap-toastr/toastr.min.js"></script>');
 
 	$js = <<<JS
 	<script type="text/javascript">
 	jQuery(function($){
-		toastr.success('$_SESSION[success]', 'Success Notification');
+		$('#edit-application').on('show.bs.modal', function(e){
+			var t = $(e.relatedTarget);
+			$.getJSON(t.attr('data-href'), function(resp){
+				
+			});
+		});
 	});
 	</script>
 JS;
-	unset( $_SESSION['success'] );
+	// unset( $_SESSION['success'] );
 	View::addJavascript($js);
-}
+// }
 ?>
