@@ -1,9 +1,9 @@
 <?php
 class Subject{
-	public static function all( $school=null ){
-		$subject = array();
-		$strSQL = "SELECT * FROM subject";
-		if( !empty( $school ) ){
+	public static function all( $sekolah=null ){
+		$subjek = array();
+		$strSQL = "SELECT * FROM subjek";
+		if( !empty( $sekolah ) ){
 			$strSQL .= " WHERE ";
 		}
 		
@@ -11,28 +11,28 @@ class Subject{
 		$statement->execute();
 		
 		while( $row = $statement->fetch(PDO::FETCH_ASSOC) ){
-			$subject[] = $row;
+			$subjek[] = $row;
 		}
 		
-		return $subject;
+		return $subjek;
 	}
 	
-	public static function ofSchool( $school ){
-		$subject = array();
-		$strSQL = "SELECT subject.* FROM school_subject 
-		INNER JOIN subject ON subject.id = school_subject.subject_id 
-		WHERE school_id=:school_id";
+	public static function ofSchool( $sekolah ){
+		$subjek = array();
+		$strSQL = "SELECT subjek.* FROM subjek_sekolah
+		INNER JOIN subjek ON subjek.id = subjek_sekolah.id_subjek 
+		WHERE id_sekolah=:id_sekolah";
 		
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		$statement->execute(array(
-			':school_id' => $school
+			':id_sekolah' => $sekolah
 		));
 		
 		while( $row = $statement->fetch(PDO::FETCH_ASSOC) ){
-			$subject[] = $row;
+			$subjek[] = $row;
 		}
 		
-		return $subject;
+		return $subjek;
 	}
 }
 ?>

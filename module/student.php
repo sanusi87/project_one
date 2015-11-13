@@ -1,91 +1,91 @@
 <?php
 class Student{
 	
-	const MALE = 'M';
-	const FEMALE = 'F';
+	const LELAKI = 'L';
+	const PEREMPUAN = 'P';
 	
 	public $id;
-	public $matric_no;
-	public $password;
-	public $programme;
-	public $faculty=0;
-	public $full_name;
-	public $date_created;
-	public $gender;
-	public $dob;
-	public $race;
+	public $no_matrik;
+	public $kata_laluan;
+	public $program_major;
+	public $fakulti=0;
+	public $nama_penuh;
+	public $tarikh_dibuat;
+	public $jantina;
+	public $tarikh_lahir;
+	public $bangsa;
 	
 	public function register(){
-		$strSQL = "INSERT INTO student SET matric_no=:matric_no, password=:password, programme=:programme, faculty=:faculty, full_name=:full_name, date_created=:date_created, gender=:gender, dob=:dob, race=:race";
+		$strSQL = "INSERT INTO pelajar SET no_matrik=:no_matrik, kata_laluan=:kata_laluan, program_major=:program_major, fakulti=:fakulti, nama_penuh=:nama_penuh, tarikh_dibuat=:tarikh_dibuat, jantina=:jantina, tarikh_lahir=:tarikh_lahir, bangsa=:bangsa";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		
 		$row = $statement->execute(array(
-			':matric_no' => $this->matric_no,
-			':password' => md5( $this->password ),
-			':programme' => $this->programme,
-			':faculty' => $this->faculty,
-			':full_name' => $this->full_name,
-			':date_created' => $this->date_created,
-			':gender' => $this->gender,
-			':dob' => $this->dob,
-			':race' => $this->race
+			':no_matrik' => $this->no_matrik,
+			':kata_laluan' => md5( $this->kata_laluan ),
+			':program_major' => $this->program_major,
+			':fakulti' => $this->fakulti,
+			':nama_penuh' => $this->nama_penuh,
+			':tarikh_dibuat' => $this->tarikh_dibuat,
+			':jantina' => $this->jantina,
+			':tarikh_lahir' => $this->tarikh_lahir,
+			':bangsa' => $this->bangsa
 		));
 		
 		if( $row ){
-			$_SESSION['student_id'] = DbConn::$dbConn->lastInsertId();
+			$_SESSION['id_pelajar'] = DbConn::$dbConn->lastInsertId();
 		}
 		
 		return $row;
 	}
 	
-	public static function findById( $student ){
-		$strSQL = "SELECT student.*, programme.long_name as programme_name, faculty.long_name as faculty_name FROM student 
-		LEFT JOIN programme ON programme.id = student.programme 
-		LEFT JOIN faculty ON faculty.id = student.faculty 
-		WHERE student.id=:student_id";
+	public static function findById( $pelajar ){
+		$strSQL = "SELECT pelajar.*, program_major.nama_panjang as nama_program, fakulti.nama_panjang as nama_fakulti FROM pelajar 
+		LEFT JOIN program_major ON program_major.id = pelajar.program_major 
+		LEFT JOIN fakulti ON fakulti.id = pelajar.fakulti 
+		WHERE pelajar.id=:id_pelajar";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
-		$statement->execute(array(':student_id' => $student));
+		$statement->execute(array(':id_pelajar' => $pelajar));
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
 		
-		$student = new self;
-		$student->id = $row['id'];
-		$student->matric_no = $row['matric_no'];
+		$pelajar = new self;
+		$pelajar->id = $row['id'];
+		$pelajar->no_matrik = $row['no_matrik'];
 		//$student->password = $row['password'];
-		$student->programme = $row['programme'];
-		$student->faculty = $row['faculty'];
-		$student->full_name = $row['full_name'];
-		$student->date_created = $row['date_created'];
-		$student->faculty_name = $row['faculty_name'];
-		$student->programme_name = $row['programme_name'];
-		$student->gender = $row['gender'];
-		$student->dob = $row['dob'];
-		$student->race = $row['race'];
+		$pelajar->program_major = $row['program_major'];
+		$pelajar->fakulti = $row['fakulti'];
+		$pelajar->nama_penuh = $row['nama_penuh'];
+		$pelajar->tarikh_dibuat = $row['tarikh_dibuat'];
+		$pelajar->nama_fakulti = $row['nama_fakulti'];
+		$pelajar->nama_program = $row['nama_program'];
+		$pelajar->jantina = $row['jantina'];
+		$pelajar->tarikh_lahir = $row['tarikh_lahir'];
+		$pelajar->bangsa = $row['bangsa'];
 		
-		return $student;
+		return $pelajar;
 	}
 	
 	public function login(){
-		$strSQL = "SELECT student.* FROM student WHERE matric_no=:username AND password=:password";
+		$strSQL = "SELECT pelajar.* FROM pelajar WHERE no_matrik=:kata_nama AND kata_laluan=:kata_laluan";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		$statement->execute(array(
-			':username' => $this->matric_no,
-			':password' => md5( $this->password )
+			':kata_nama' => $this->no_matrik,
+			':kata_laluan' => md5( $this->kata_laluan )
 		));
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
 		
 		if( count( $row ) > 0 ){
-			$_SESSION['student_id'] = $row['id'];
+			$_SESSION['id_pelajar'] = $row['id'];
 			return true;
 		}
 		return false;
 	}
 	
-	public static function races(){
+	public static function bangsa(){
 		return [
-			1 => 'Malay',
-			2 => 'Chinese',
-			3 => 'Indian',
-			4 => 'Other'
+			1 => 'Melayu',
+			2 => 'Cina',
+			3 => 'India',
+			4 => 'Lain-lain'
 		];
 	}
 	

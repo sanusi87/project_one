@@ -1,16 +1,16 @@
 <?php
-$student = new Student();
-$student->matric_no = htmlentities( $_POST['username'], ENT_QUOTES );
-$student->password = $_POST['password'];
-$student->programme = (int)$_POST['programme'];
-// $student->faculty = (int)$_POST['faculty'];
-$student->full_name = htmlentities( $_POST['studentname'], ENT_QUOTES );
-$student->gender = $_POST['gender'];
-$student->dob = date( 'Y-m-d H:i:s', strtotime( $_POST['dob'] ) );
-$student->race = $_POST['race'];
-$student->date_created = date('Y-m-d H:i:s');
+$pelajar = new Student();
+$pelajar->no_matrik = htmlentities( $_POST['kata_nama'], ENT_QUOTES );
+$pelajar->kata_laluan = $_POST['kata_laluan'];
+$pelajar->program_major = (int)$_POST['program_major'];
+// $pelajar->faculty = (int)$_POST['faculty'];
+$pelajar->nama_penuh = htmlentities( $_POST['namapelajar'], ENT_QUOTES );
+$pelajar->jantina = $_POST['jantina'];
+$pelajar->tarikh_lahir = date( 'Y-m-d H:i:s', strtotime( $_POST['tarikh_lahir'] ) );
+$pelajar->bangsa = $_POST['bangsa'];
+$pelajar->tarikh_dibuat = date('Y-m-d H:i:s');
 
-if( $student->register() ){
+if( $pelajar->register() ){
 	header('Location: index.php?module=student');
 }else{
 	header('Location: index.php?module=student&action=register');

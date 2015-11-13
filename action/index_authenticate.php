@@ -2,7 +2,7 @@
 ob_start();
 $faculties = Faculty::all();
 $programmes = Programme::all();
-$races = Student::races();
+$bangsa = Student::bangsa();
 ?>
 	
 	<div class="text-center">
@@ -44,16 +44,16 @@ $races = Student::races();
 			<div class="slider-wrapper theme-default">
 				<div id="slider" class="nivoSlider">
 					<a href="#">
-						<img src="/assets/plugins/nivo-slider/demo/images/toystory.jpg" alt="" title="#htmlcaption1" />
+						<img src="/assets/plugins/nivo-slider/demo/images/m1.jpg" alt="" title="#htmlcaption1" />
 					</a>
 					<a href="#">
-						<img src="/assets/plugins/nivo-slider/demo/images/nemo.jpg" alt="" title="#htmlcaption2" />
+						<img src="/assets/plugins/nivo-slider/demo/images/m2.jpg" alt="" title="#htmlcaption2" />
 					</a>
 					<a href="#">
-						<img src="/assets/plugins/nivo-slider/demo/images/walle.jpg" alt="" title="#htmlcaption3" />
+						<img src="/assets/plugins/nivo-slider/demo/images/m3.jpg" alt="" title="#htmlcaption3" />
 					</a>
 					<a href="#">
-						<img src="/assets/plugins/nivo-slider/demo/images/up.jpg" alt="" title="#htmlcaption4" />
+						<img src="/assets/plugins/nivo-slider/demo/images/m4.jpg" alt="" title="#htmlcaption4" />
 					</a>
 				</div>
 				
@@ -80,13 +80,13 @@ $races = Student::races();
 			<h4>Student Login:</h4>
 			<form action="index.php?module=student&action=login" class="form-vertical" method="post">
 				<div class="form-group">
-					<label for="username">Matric No.</label>
-					<input type="text" class="form-control" name="username" />
+					<label for="kata_nama">No. Matrik</label>
+					<input type="text" class="form-control" name="kata_nama" />
 				</div>
 				
 				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" class="form-control" name="password" />
+					<label for="kata_laluan">Kata Laluan</label>
+					<input type="password" class="form-control" name="kata_laluan" />
 				</div>
 				
 				<button class="btn btn-md btn-primary">
@@ -94,7 +94,9 @@ $races = Student::races();
 				</button>
 			</form>
 			<br />
+            <a href="#student-register" class="btn btn-link" data-toggle="modal"><i class="fa fa-key"></i> Pendaftaran Pelajar</a>
 			<a href="#administrator-login" class="btn btn-link" data-toggle="modal"><i class="fa fa-key"></i> Administrator Login</a>
+            
 			<!-- login form -->
 		</div>
 	</div>
@@ -233,7 +235,7 @@ $races = Student::races();
 					<form action="index.php?module=admin&action=login" class="form-horizontal" method="post">
 						<div class="form-group">
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<label for="username">Username</label>
+								<label for="username">Kata Nama</label>
 							</div>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<input type="text" class="form-control" name="username" />
@@ -242,7 +244,47 @@ $races = Student::races();
 						
 						<div class="form-group">
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<label for="password">Password</label>
+								<label for="password">Kata Laluan</label>
+							</div>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<input type="password" class="form-control" name="password" />
+							</div>
+						</div>
+						
+						<button class="btn btn-md btn-primary">
+							<i class="fa fa-sign-in"></i> Login
+						</button>
+					</form>
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+    
+    <div class="modal" id="student-register">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">Pendaftaran Baru</h4>
+				</div>
+				<div class="modal-body">
+					<form action="index.php?module=student&action=register" class="form-horizontal" method="post">
+						<div class="form-group">
+							<div class="col-md-3 col-sm-3 col-xs-12">
+								<label for="username">Kata Nama</label>
+							</div>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<input type="text" class="form-control" name="username" />
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="col-md-3 col-sm-3 col-xs-12">
+								<label for="password">Kata Laluan</label>
 							</div>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<input type="password" class="form-control" name="password" />

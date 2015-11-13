@@ -1,12 +1,12 @@
 <?php
 ob_start();
-$applications = Application::all( $_SESSION['student_id'] );
+$applications = Application::all( $_SESSION['id_pelajar'] );
 //$student = Student
 ?>
 
 <div>
 	<div>
-		<h1>Applications</h1>
+		<h1>Permohonan</h1>
 		<hr />
 	</div>
 	<?php
@@ -24,13 +24,13 @@ $applications = Application::all( $_SESSION['student_id'] );
 				<div class="col-md-6 col-sm-6 col-xs-12">
 					<div class="row">
 						<div class="col-md-2 col-md-2 col-xs-1">#</div>
-						<div class="col-md-5 col-md-5 col-xs-11">School</div>
+						<div class="col-md-5 col-md-5 col-xs-11">Sekolah</div>
 						<div class="col-md-5 col-md-5 col-xs-12">Status</div>
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-					<div class="col-md-4 col-md-4 col-xs-6">Applied On</div>
-					<div class="col-md-4 col-md-4 col-xs-6">Updated On</div>
+					<div class="col-md-4 col-md-4 col-xs-6">Tarikh Permohonan</div>
+					<div class="col-md-4 col-md-4 col-xs-6">Tarikh Kemaskini</div>
 					<div class="col-md-4 col-md-4 col-xs-12">&nbsp;</div>
 				</div>
 				
@@ -46,15 +46,15 @@ $applications = Application::all( $_SESSION['student_id'] );
 					<div class="row">
 						<div class="col-md-2 col-md-2 col-xs-1"><?php echo $i; ?></div>
 						<div class="col-md-5 col-md-5 col-xs-11">
-							<?php echo $application['school_name']; ?><br />
-							<small class="text-muted"><?php echo $application['subject_name']; ?></small>
+							<?php echo $application['nama_sekolah']; ?><br />
+							<small class="text-muted"><?php echo $application['nama_subjek']; ?></small>
 						</div>
 						<div class="col-md-5 col-md-5 col-xs-12"><?php echo $application['app_status']; ?></div>
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-					<div class="col-md-4 col-md-4 col-xs-6"><?php echo $application['date_added'] ?></div>
-					<div class="col-md-4 col-md-4 col-xs-6"><?php echo $application['date_updated'] ?></div>
+					<div class="col-md-4 col-md-4 col-xs-6"><?php echo $application['tarikh_dibuat'] ?></div>
+					<div class="col-md-4 col-md-4 col-xs-6"><?php echo $application['tarikh_kemaskini'] ?></div>
 					<div class="col-md-4 col-md-4 col-xs-12">
 						<a class="btn btn-default btn-sm" href="index.php?module=application&action=print&id=<?php echo $application['id']; ?>" target="_blank">
 							<i class="fa fa-print"></i> Print
