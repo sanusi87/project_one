@@ -49,7 +49,7 @@ $applications = Application::all( $_SESSION['id_pelajar'] );
 							<?php echo $application['nama_sekolah']; ?><br />
 							<small class="text-muted"><?php echo $application['nama_subjek']; ?></small>
 						</div>
-						<div class="col-md-5 col-md-5 col-xs-12"><?php echo $application['app_status']; ?></div>
+						<div class="col-md-5 col-md-5 col-xs-12"><?php echo $application['status_mohon']; ?></div>
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-12">
