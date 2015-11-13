@@ -9,11 +9,11 @@ if( isset( $_POST ) && !empty( $_POST ) ){
 	$application->status = (int)$_POST['status'];
 	
 	if( $application->update() ){
-		$_SESSION['success'] = 'Application updated!';
+		// $_SESSION['success'] = 'Application updated!';
 		header('Location: index.php?module=admin');
 		exit;
 	}else{
-		$_SESSION['error'] = 'Failed to update application!';
+		// $_SESSION['error'] = 'Failed to update application!';
 	}
 }
 
