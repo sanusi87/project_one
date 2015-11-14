@@ -11,7 +11,7 @@ $action = $_GET['action'];
 
 if( !isset( $_SESSION['id_pelajar'] ) && !isset( $_SESSION['id_admin'] ) ){
 	if( empty( $_POST ) ){
-		$module = null;
+		$module = $module == 'site' ? $module : null;
 	}
 }
 // var_dump( $module );
