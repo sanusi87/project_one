@@ -15,7 +15,7 @@ $races = Student::races();
 			<div class="text-center">
 				<a href="#student-login" data-toggle="modal">
 					<span style="font-size:32px"><i class="fa fa-user"></i></span>
-					<h2>Student</h2>
+					<h2>Pelajar</h2>
 				</a>
 			</div>
 		</div>
@@ -23,7 +23,7 @@ $races = Student::races();
 			<div class="text-center">
 				<a href="#administrator-login" data-toggle="modal">
 					<span style="font-size:32px"><i class="fa fa-key"></i></span>
-					<h2>Administrator</h2>
+					<h2>Penyelaras</h2>
 				</a>	
 			</div>
 		</div>
@@ -35,15 +35,15 @@ $races = Student::races();
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span>
-						<span class="sr-only">Close</span>
+						<span class="sr-only">Tutup</span>
 					</button>
-					<h4 class="modal-title">Student</h4>
+					<h4 class="modal-title">Pelajar</h4>
 				</div>
 				<div class="modal-body">
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
-						<li role="presentation"><a href="#register" aria-controls="register" role="tab" data-toggle="tab">Register</a></li>
+						<li role="presentation"><a href="#register" aria-controls="register" role="tab" data-toggle="tab">Daftar Pelajar</a></li>
 					</ul>
 
 					<!-- Tab panes -->
@@ -52,7 +52,7 @@ $races = Student::races();
 							<form action="index.php?module=student&action=login" class="form-horizontal" method="post">
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
-										<label for="username">Matric No.</label>
+										<label for="username">No. Matrik</label>
 									</div>
 									<div class="col-md-9 col-sm-9 col-xs-12">
 										<input type="text" class="form-control" name="username" />
@@ -61,7 +61,7 @@ $races = Student::races();
 								
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
-										<label for="password">Password</label>
+										<label for="password">Kata Laluan</label>
 									</div>
 									<div class="col-md-9 col-sm-9 col-xs-12">
 										<input type="password" class="form-control" name="password" />
@@ -78,7 +78,7 @@ $races = Student::races();
 							<form action="index.php?module=student&action=register" class="form-horizontal" method="post">
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
-										<label for="studentname">Name</label>
+										<label for="studentname">Nama</label>
 									</div>
 									<div class="col-md-9 col-sm-9 col-xs-12">
 										<input type="text" class="form-control" name="studentname" id="studentname" placeholder="Name" />
@@ -87,7 +87,7 @@ $races = Student::races();
 								
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
-										<label for="username">Matric No.</label>
+										<label for="username">No. Matrik</label>
 									</div>
 									<div class="col-md-9 col-sm-9 col-xs-12">
 										<input type="text" class="form-control" name="username" id="username" placeholder="Matric No." />
@@ -96,7 +96,7 @@ $races = Student::races();
 								
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
-										<label for="password">Password</label>
+										<label for="password">Kata Laluan</label>
 									</div>
 									<div class="col-md-9 col-sm-9 col-xs-12">
 										<input type="password" class="form-control" name="password" />
@@ -105,7 +105,7 @@ $races = Student::races();
 								
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
-										<label for="programme">Programme</label>
+										<label for="programme">Program</label>
 									</div>
 									<div class="col-md-9 col-sm-9 col-xs-12">
 										<select name="programme" id="programme" class="form-control">
@@ -136,18 +136,18 @@ $races = Student::races();
 								
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
-										<label for="username">Gender</label>
+										<label for="username">Jantina</label>
 									</div>
 									<div class="col-md-9 col-sm-9 col-xs-12">
 										<div class="row">
 											<div class="col-md-6 col-sm-6 col-sm-6">
 												<label for="gender_m">
-													<input type="radio" name="gender" value="<?php echo Student::MALE; ?>" id="gender_m" /> Male
+													<input type="radio" name="gender" value="<?php echo Student::LELAKI; ?>" id="gender_m" /> Lelaki
 												</label>
 											</div>
 											<div class="col-md-6 col-sm-6 col-sm-6">
 												<label for="gender_f">
-													<input type="radio" name="gender" value="<?php echo Student::FEMALE; ?>" id="gender_f" /> Female
+													<input type="radio" name="gender" value="<?php echo Student::PEREMPUAN; ?>" id="gender_f" /> Perempuan
 												</label>
 											</div>
 										</div>
@@ -156,16 +156,16 @@ $races = Student::races();
 								
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
-										<label for="dob">Date of Birth</label>
+										<label for="dob">Tarikh Lahir</label>
 									</div>
 									<div class="col-md-9 col-sm-9 col-xs-12">
-										<input type="date" class="form-control" name="dob" id="dob" readonly="readonly" placeholder="dd-mm-yyyy" />
+										<input type="date" class="form-control" name="dob" id="dob" readonly placeholder="dd-mm-yyyy" />
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<div class="col-md-3 col-sm-3 col-xs-12">
-										<label for="race">Race</label>
+										<label for="race">Bangsa</label>
 									</div>
 									<div class="col-md-9 col-sm-9 col-xs-12">
 										<select name="race" id="race" class="form-control">
@@ -179,7 +179,7 @@ $races = Student::races();
 								</div>
 								
 								<button class="btn btn-md btn-primary">
-									<i class="fa fa-sign-in"></i> Register
+									<i class="fa fa-sign-in"></i> Daftar
 								</button>
 							</form>
 						</div>
@@ -197,13 +197,13 @@ $races = Student::races();
 						<span aria-hidden="true">&times;</span>
 						<span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title">Administrator Login</h4>
+					<h4 class="modal-title">Log Masuk Penyelaras</h4>
 				</div>
 				<div class="modal-body">
 					<form action="index.php?module=admin&action=login" class="form-horizontal" method="post">
 						<div class="form-group">
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<label for="username">Username</label>
+								<label for="username">Kata Nama</label>
 							</div>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<input type="text" class="form-control" name="username" />
@@ -212,7 +212,7 @@ $races = Student::races();
 						
 						<div class="form-group">
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<label for="password">Password</label>
+								<label for="password">Kata Laluan</label>
 							</div>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<input type="password" class="form-control" name="password" />

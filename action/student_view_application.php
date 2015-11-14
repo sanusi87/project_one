@@ -13,7 +13,7 @@ $applications = Application::all( $_SESSION['id_pelajar'] );
 	if( empty( $applications ) ){
 	?>
 	<div class="alert alert-warning">
-		<i class="fa fa-warning"></i> No application submitted!
+		<i class="fa fa-warning"></i> Tiada Permohonan di Hantar!
 	</div>
 	<?php
 	}else{

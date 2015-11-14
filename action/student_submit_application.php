@@ -6,11 +6,11 @@ if( isset( $_POST ) && !empty( $_POST ) ){
 	$application->id_subjek = (int)$_POST['subjek'];
 	
 	if( $application->submit() ){
-		$_SESSION['success'] = 'Application submitted!';
+		$_SESSION['success'] = 'Permohonan Di Hantar!';
 		header('Location: index.php?module=student');
 		exit;
 	}else{
-		$_SESSION['error'] = 'Application failed!';
+		$_SESSION['error'] = 'Permohonan Gagal!';
 	}
 }
 
@@ -22,26 +22,34 @@ $application = Application::all( $_SESSION['id_pelajar'], array('status' => 1) )
 
 <div>
 	<div>
-		<h1>Submit new Application</h1>
+		<h1>Permohonan Baru</h1>
 		<hr />
 	</div>
 	
 	<?php if( count( $application ) > 0 ){ ?>
 	<div class="alert alert-info">
-		<i class="fa fa-info-circle"></i> New application is not permitted because you still have a pending approval application.
+		<i class="fa fa-info-circle"></i> Permohonan baru tidak di benarkan kerana permohonan terdahulu anda masih dalam proses semakan. 
 	</div>
 	<?php } ?>
 	
 	<form action="" class="form-horizontal" method="post" id="application-form">
 		<input type="hidden" name="id_pelajar" value="<?php echo $pelajar->id; ?>" />
-		<h3>Student Record</h3>
+		<h3>Rekod Pelajar</h3>
 		<hr />
 		<div class="form-group">
 			<div class="col-md-3 col-sm-3 col-xs-12">
-				<label for="no_matrik">Matric No.</label>
+				<label for="no_matrik">No. Matrik</label>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12">
 				<input type="text" class="form-control" value="<?php echo $pelajar->no_matrik; ?>" name="no_matrik" readonly/>
+			</div>
+		</div>
+        		<div class="form-group">
+			<div class="col-md-3 col-sm-3 col-xs-12">
+				<label for="no_kp">No. Kad Pengenalan</label>
+			</div>
+			<div class="col-md-9 col-sm-9 col-xs-12">
+				<input type="text" class="form-control" value="<?php echo $pelajar->no_kp; ?>" name="no_kp" readonly/>
 			</div>
 		</div>
 		 
@@ -105,7 +113,7 @@ $application = Application::all( $_SESSION['id_pelajar'], array('status' => 1) )
 		</div>
 		<?php if( count( $application ) == 0 ){ ?>
 		<button type="submit" class="btn btn-primary btn-md">
-			<i class="fa fa-angle-double-right"></i> Submit
+			<i class="fa fa-angle-double-right"></i> Hantar
 		</button>
 		<?php } ?>
 	</form>
@@ -125,11 +133,11 @@ $js = <<<JS
 			var errors = [];
 			
 			if( $('#sekolah').val() == '' ){
-				errors.push('Please select a sekolah!');
+				errors.push('Sila pilih sekolah!');
 			}
 			
 			if( $('#subjek').val() == '' ){
-				errors.push('Please select a subjek!');
+				errors.push('Sila pilih subjek!');
 			}
 			
 			if( errors.length > 0 ){

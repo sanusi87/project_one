@@ -22,10 +22,10 @@
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="index.php?module=student">All Applications</a></li>
-						<li><a href="index.php?module=student&action=new-application">Submit Application</a></li>
-						<li><a href="index.php?module=site&action=contact">Contact Us</a></li>
-						<li><a href="index.php?module=site&action=guide">User Guide</a></li>
+						<li><a href="index.php?module=student">Permohonan</a></li>
+						<li><a href="index.php?module=student&action=new-application">Permohonan Sekolah</a></li>
+						<li><a href="index.php?module=site&action=contact">Hubungi Kami</a></li>
+						<li><a href="index.php?module=site&action=guide">Panduan</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>

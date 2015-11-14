@@ -10,7 +10,7 @@ $bangsa = Student::bangsa();
 			<br />
 			<br />
 			<br />
-			<h1><?php echo APPNAME; ?></h1>
+			<!--<h1>Sistem Pendaftaran Latihan Mengajar</h1>-->
 		</div>
 		
 		<br />
@@ -27,10 +27,10 @@ $bangsa = Student::bangsa();
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="#">UTAMA</a></li>
-						<li><a href="#">TENTANG KAMI</a></li>
-						<li><a href="#">PANDUAN</a></li>
-						<li><a href="#">HUBUNGI KAMI</a></li>
+						<li><a href="index.php">Utama</a></li>
+						<li><a href="index.php?module=site&action=namorima">Tentang Kami</a></li>
+						<li><a href="index.php?module=site&action=guide">Panduan</a></li>
+						<li><a href="index.php?module=site&action=contact">Hubungi Kami</a></li>
 					</ul>
 				</div>
 			</div>
@@ -39,7 +39,7 @@ $bangsa = Student::bangsa();
 	<br />
 	<div class="row">
 		<div class="col-md-9 col-sm-9 col-xs-12">
-			<h2>Welcome to <?php echo APPNAME; ?></h2>
+			<h2>Selamat Datang ke <?php echo APPNAME; ?></h2>
 			<!-- slider -->
 			<div class="slider-wrapper theme-default">
 				<div id="slider" class="nivoSlider">
@@ -77,7 +77,7 @@ $bangsa = Student::bangsa();
 		
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<!-- login form -->
-			<h4>Student Login:</h4>
+			<h4>Log Masuk Pelajar:</h4>
 			<form action="index.php?module=student&action=login" class="form-vertical" method="post">
 				<div class="form-group">
 					<label for="kata_nama">No. Matrik</label>
@@ -95,7 +95,7 @@ $bangsa = Student::bangsa();
 			</form>
 			<br />
             <a href="#student-register" class="btn btn-link" data-toggle="modal"><i class="fa fa-key"></i> Pendaftaran Pelajar</a>
-			<a href="#administrator-login" class="btn btn-link" data-toggle="modal"><i class="fa fa-key"></i> Administrator Login</a>
+			<a href="#administrator-login" class="btn btn-link" data-toggle="modal"><i class="fa fa-key"></i> Log Masuk Pentadbir</a>
             
 			<!-- login form -->
 		</div>
@@ -229,7 +229,7 @@ $bangsa = Student::bangsa();
 						<span aria-hidden="true">&times;</span>
 						<span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title">Administrator Login</h4>
+					<h4 class="modal-title">Log Masuk Pentadbir</h4>
 				</div>
 				<div class="modal-body">
 					<form action="index.php?module=admin&action=login" class="form-horizontal" method="post">
@@ -273,28 +273,121 @@ $bangsa = Student::bangsa();
 				</div>
 				<div class="modal-body">
 					<form action="index.php?module=student&action=register" class="form-horizontal" method="post">
-						<div class="form-group">
-							<div class="col-md-3 col-sm-3 col-xs-12">
-								<label for="username">Kata Nama</label>
-							</div>
-							<div class="col-md-9 col-sm-9 col-xs-12">
-								<input type="text" class="form-control" name="username" />
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<div class="col-md-3 col-sm-3 col-xs-12">
-								<label for="password">Kata Laluan</label>
-							</div>
-							<div class="col-md-9 col-sm-9 col-xs-12">
-								<input type="password" class="form-control" name="password" />
-							</div>
-						</div>
-						
-						<button class="btn btn-md btn-primary">
-							<i class="fa fa-sign-in"></i> Login
-						</button>
-					</form>
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="nama_penuh">Nama Pelajar</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<input type="text" class="form-control" name="nama_penuh" id="nama_penuh" placeholder="Nama Penuh" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="no_matrik">No. Matrik</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<input type="text" class="form-control" name="no_matrik" id="no_matrik" placeholder="No. Matrik" />
+									</div>
+								</div>
+                                
+									<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="no_kp">No. Kad Pengenalan</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<input type="text" class="form-control" name="no_kp" id="no_kp" placeholder="No. Kad Pengenalan" />
+									</div>
+								</div>
+                                
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="kata_laluan">Kata Laluan</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<input type="password" class="form-control" name="kata_laluan" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="program_major">Program</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<select name="program_major" id="program_major" class="form-control">
+											<?php
+											foreach( $programmes as $program_major ){
+												echo "<option value=\"$program_major[id]\">$program_major[nama_panjang]</option>";
+											}
+											?>
+										</select>
+									</div>
+								</div>
+								
+								<?php /* ?>
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="faculty">Faculty</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<select name="faculty" id="faculty" class="form-control">
+											<?php
+											foreach( $faculties as $faculty ){
+												echo "<option value=\"$faculty[id]\">$faculty[long_name]</option>";
+											}
+											?>
+										</select>
+									</div>
+								</div><?php */ ?>
+								
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="jantina">Jantina</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="row">
+											<div class="col-md-6 col-sm-6 col-sm-6">
+												<label for="gender_m">
+													<input type="radio" name="jantina" value="<?php echo Student::LELAKI; ?>" id="gender_m" /> Lelaki
+												</label>
+											</div>
+											<div class="col-md-6 col-sm-6 col-sm-6">
+												<label for="gender_f">
+													<input type="radio" name="jantina" value="<?php echo Student::PEREMPUAN; ?>" id="gender_f" /> Perempuan
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="tarikh_lahir">Tarikh Lahir</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<input type="date" class="form-control" name="tarikh_lahir" id="tarikh_lahir" readonly placeholder="dd-mm-yyyy" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-md-3 col-sm-3 col-xs-12">
+										<label for="bangsa">Bangsa</label>
+									</div>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<select name="bangsa" id="bangsa" class="form-control">
+											<?php
+											foreach( $bangsa as $id => $bangsa ){
+												echo "<option value=\"$id\">$bangsa</option>";
+											}
+											?>
+										</select>
+									</div>
+								</div>
+								
+								<button class="btn btn-md btn-primary">
+									<i class="fa fa-sign-in"></i> Daftar
+								</button>
+							</form>
 				</div>
 				<div class="modal-footer"></div>
 			</div>
@@ -319,7 +412,7 @@ $js = <<<JS
 <script type="text/javascript">
 jQuery(function($){
 	// start date of birth datepicker
-	$('#dob').datepicker({
+	$('#tarikh_lahir').datepicker({
 		format: 'dd-mm-yyyy',
 	});
 	

@@ -13,7 +13,7 @@ $applications = Application::all();
 	if( empty( $applications ) ){
 	?>
 	<div class="alert alert-warning">
-		<i class="fa fa-warning"></i> No application submitted!
+		<i class="fa fa-warning"></i> Tiada Permohonan Di Terima!
 	</div>
 	<?php
 	}else{
@@ -25,7 +25,7 @@ $applications = Application::all();
 				<div class="col-md-4 col-md-4 col-xs-11">Sekolah</div>
 				<div class="col-md-2 col-md-2 col-xs-6">Tarikh Permohonan</div>
 				<div class="col-md-2 col-md-2 col-xs-6">Kemaskini</div>
-				<div class="col-md-3 col-md-3 col-xs-12">Action</div>
+				<div class="col-md-3 col-md-3 col-xs-12">Tindakan</div>
 			</div>
 		</div>
 	<?php

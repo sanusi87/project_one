@@ -8,6 +8,7 @@
 		<?php View::stylesheets(); ?>
 	</head>
 	<body>
+    <h3 align="center">Sistem Pendaftaran Latihan Mengajar</h3>
 		<div class="container" id="main-content">
 			<?php View::content(); ?>
 		</div>

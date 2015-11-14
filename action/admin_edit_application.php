@@ -27,13 +27,13 @@ ob_start();
 ?>
 <div>
 	<div>
-		<h1>Update Applications <span class="text-muted">#<?php echo $id; ?></span></h1>
+		<h1>Kemaskini Permohonan <span class="text-muted">#<?php echo $id; ?></span></h1>
 		<hr />
 	</div>
 	
 	<form action="" class="form-horizontal" method="post" id="application-form">
 		<input type="hidden" name="id_pelajar" value="<?php echo $pelajar->id; ?>" />
-		<h3>Student Record</h3>
+		<h3>Rekod Pelajar</h3>
 		<hr />
 		<div class="form-group">
 			<div class="col-md-3 col-sm-3 col-xs-12">
@@ -55,7 +55,7 @@ ob_start();
 		
 		<div class="form-group">
 			<div class="col-md-3 col-sm-3 col-xs-12">
-				<label for="program_major">Program Major</label>
+				<label for="program_major">Program</label>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12">
 				<input type="text" class="form-control" value="<?php echo $pelajar->program_major; ?>" name="program_major" readonly />
@@ -71,7 +71,7 @@ ob_start();
 			</div>
 		</div><?php */ ?>
 		
-		<h3>School Record</h3>
+		<h3>Rekod Sekolah</h3>
 		<hr />
 		
 		<div class="form-group">
@@ -80,7 +80,7 @@ ob_start();
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12">
 				<select name="sekolah" id="sekolah" class="form-control">
-					<option value="">-- select --</option>
+					<option value="">-- sila pilih --</option>
 				<?php
 				foreach( $sekolahs as $sekolah ){
 					if( $sekolah['id'] == $app->id_sekolah ){
@@ -121,7 +121,7 @@ ob_start();
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-12">
 				<select name="status" id="status" class="form-control">
-					<option value="">-- select --</option>
+					<option value="">-- sila pilih --</option>
 				<?php
 				foreach( $statuses as $status ){
 					if( $status['id'] == $app->status ){
@@ -136,7 +136,7 @@ ob_start();
 		</div>
 		
 		<button type="submit" class="btn btn-primary btn-md">
-			<i class="fa fa-angle-double-right"></i> Submit
+			<i class="fa fa-angle-double-right"></i> Hantar
 		</button>
 		
 	</form>

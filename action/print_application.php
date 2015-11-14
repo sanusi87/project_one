@@ -36,10 +36,11 @@
 	<table class="table">
 		<tbody>
 			<tr>
-				<th colspan="2">Student Details</th>
+				<th colspan="2">Butiran Pelajar</th>
 			</tr>
 			<tr><td>Nama</td><td>: <?php echo $pelajar->nama_penuh; ?></td></tr>
 			<tr><td>No. Matrik</td><td>: <?php echo $pelajar->no_matrik; ?></td></tr>
+            <tr><td>No. Kad Pengenalan</td><td>: <?php echo $pelajar->no_kp; ?></td></tr>
 			<tr><td>Program</td><td>: <?php echo $programmes[$pelajar->program_major]; ?></td></tr>
 			<tr><td>Jantina</td><td>: <?php echo $pelajar->jantina == Student::LELAKI ? 'Lelaki' : 'PEREMPUAN'; ?></td></tr>
 			<tr><td>Tarikh Lahir</td><td>: <?php echo $pelajar->tarikh_lahir; ?></td></tr>
@@ -51,11 +52,11 @@
 		
 		<tbody>
 			<tr>
-				<th colspan="2">Application Details</th>
+				<th colspan="2">Butiran Permohonan</th>
 			</tr>
 			<tr><td>Sekolah</td><td>: <?php echo $sekolahs[$app->id_sekolah]; ?></td></tr>
 			<tr><td>Subjek</td><td>: <?php echo $subjeks[$app->id_subjek]; ?></td></tr>
-			<tr><td>Submitted On</td><td>: <?php echo $app->tarikh_dibuat; ?></td></tr>
+			<tr><td>Tarikh di Hantar</td><td>: <?php echo $app->tarikh_dibuat; ?></td></tr>
 			<tr><td>Status</td><td>: <?php echo $statuses[$app->status]; ?></td></tr>
 		</tbody>
 	</table>

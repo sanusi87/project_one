@@ -6,6 +6,7 @@ class Student{
 	
 	public $id;
 	public $no_matrik;
+	public $no_kp;
 	public $kata_laluan;
 	public $program_major;
 	public $fakulti=0;
@@ -16,11 +17,12 @@ class Student{
 	public $bangsa;
 	
 	public function register(){
-		$strSQL = "INSERT INTO pelajar SET no_matrik=:no_matrik, kata_laluan=:kata_laluan, program_major=:program_major, fakulti=:fakulti, nama_penuh=:nama_penuh, tarikh_dibuat=:tarikh_dibuat, jantina=:jantina, tarikh_lahir=:tarikh_lahir, bangsa=:bangsa";
+		$strSQL = "INSERT INTO pelajar SET no_matrik=:no_matrik, no_kp=:no_kp, kata_laluan=:kata_laluan, program_major=:program_major, fakulti=:fakulti, nama_penuh=:nama_penuh, tarikh_dibuat=:tarikh_dibuat, jantina=:jantina, tarikh_lahir=:tarikh_lahir, bangsa=:bangsa";
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		
 		$row = $statement->execute(array(
 			':no_matrik' => $this->no_matrik,
+			':no_kp' => $this->no_kp,
 			':kata_laluan' => md5( $this->kata_laluan ),
 			':program_major' => $this->program_major,
 			':fakulti' => $this->fakulti,
@@ -50,6 +52,7 @@ class Student{
 		$pelajar = new self;
 		$pelajar->id = $row['id'];
 		$pelajar->no_matrik = $row['no_matrik'];
+		$pelajar->no_kp = $row['no_kp'];
 		//$student->password = $row['password'];
 		$pelajar->program_major = $row['program_major'];
 		$pelajar->fakulti = $row['fakulti'];
