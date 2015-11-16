@@ -84,12 +84,12 @@ class Student{
 	}
 	
 	public static function bangsa(){
-		return [
+		return array(
 			1 => 'Melayu',
 			2 => 'Cina',
 			3 => 'India',
 			4 => 'Lain-lain'
-		];
+		);
 	}
 	
 }
