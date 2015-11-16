@@ -28,7 +28,7 @@ $bangsa = Student::bangsa();
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="index.php">Utama</a></li>
-						<li><a href="index.php?module=site&action=namorima">Tentang Kami</a></li>
+						<li><a href="index.php?module=site&action=about">Tentang Kami</a></li>
 						<li><a href="index.php?module=site&action=guide">Panduan</a></li>
 						<li><a href="index.php?module=site&action=contact">Hubungi Kami</a></li>
 					</ul>
@@ -57,7 +57,7 @@ $bangsa = Student::bangsa();
 					</a>
 				</div>
 				
-				<div id="html-caption-group">
+				<!--<div id="html-caption-group">
 					<div id="htmlcaption1" class="nivo-html-caption">
 						<strong>This</strong> is an example of a <em>HTML</em> caption 1 with <a href="#">a link</a>. 
 					</div>
@@ -70,7 +70,7 @@ $bangsa = Student::bangsa();
 					<div id="htmlcaption1" class="nivo-html-caption">
 						<strong>This</strong> is an example of a <em>HTML</em> caption 4 with <a href="#">a link</a>. 
 					</div>
-				</div>
+				</div>-->
 			</div>
 			<!-- slider -->
 		</div>

@@ -23,6 +23,7 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="index.php?module=admin">Semua Permohonan</a></li>
+                        <li><a href="index.php?module=admin&action=search">Carian Pelajar</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>

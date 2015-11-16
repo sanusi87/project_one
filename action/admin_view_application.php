@@ -6,7 +6,7 @@ $applications = Application::all();
 
 <div>
 	<div>
-		<h1>Applications</h1>
+		<h1>Permohonan Pelajar</h1>
 		<hr />
 	</div>
 	<?php
@@ -46,7 +46,7 @@ $applications = Application::all();
 					<div class="btn btn-group btn-group-xs">
 					<?php if( $application['status'] == 1 ){ ?>
 						<a class="btn btn-primary" href="index.php?module=admin&action=approve&id=<?php echo $application['id']; ?>">
-							<i class="fa fa-check"></i> Approve
+							<i class="fa fa-check"></i> Lulus
 						</a>
 						
 						<?php /* ?><a class="btn btn-default" data-href="index.php?module=application&action=info&id=<?php echo $application['id']; ?>" href="#edit-application" data-toggle="modal">
@@ -54,24 +54,24 @@ $applications = Application::all();
 						</a><?php */ ?>
 						
 						<a class="btn btn-default" href="index.php?module=application&action=edit&id=<?php echo $application['id']; ?>">
-							<i class="fa fa-edit"></i> Edit
+							<i class="fa fa-edit"></i> Kemaskini
 						</a>
 						
 						<a class="btn btn-danger" href="index.php?module=admin&action=reject&id=<?php echo $application['id']; ?>">
-							<i class="fa fa-ban"></i> Reject
+							<i class="fa fa-ban"></i> Gagal
 						</a>
 					<?php
 						}else{
 							if( $application['status'] == 2 ){
 					?>
 						<button type="button" disabled="disabled" class="btn btn-primary">
-							<i class="fa fa-check"></i> Approve
+							<i class="fa fa-check"></i> Lulus
 						</button>
 					<?php
 							}elseif( $application['status'] == 3 ){
 					?>
 						<button type="button" disabled="disabled" class="btn btn-danger">
-							<i class="fa fa-ban"></i> Reject
+							<i class="fa fa-ban"></i> Gagal
 						</button>
 					<?php
 							}
@@ -98,9 +98,9 @@ $applications = Application::all();
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span>
-					<span class="sr-only">Close</span>
+					<span class="sr-only">Tutup</span>
 				</button>
-				<h4 class="modal-title">Edit Application</h4>
+				<h4 class="modal-title">Kemaskini Permohonan</h4>
 			</div>
 			<div class="modal-body">
 				
