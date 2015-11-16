@@ -1,6 +1,6 @@
 <?php
 function __autoload( $class_name ){
-	include "module/".$class_name.'.php';
+	include "module/".strtolower($class_name).'.php';
 
 }
 
