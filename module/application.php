@@ -113,7 +113,7 @@ class Application{
 	public static function statuses(){
 		$strSQL = "SELECT * FROM status_permohonan";
 		$statement = DbConn::$dbConn->query( $strSQL );
-		$statuses = [];
+		$statuses = array();
 		
 		while( $row = $statement->fetch(PDO::FETCH_ASSOC) ){
 			$statuses[] = $row;
