@@ -7,10 +7,7 @@ $bangsa = Student::bangsa();
 	
 	<div class="text-center">
 		<div id="main-banner">
-			<br />
-			<br />
-			<br />
-			<!--<h1>Sistem Pendaftaran Latihan Mengajar</h1>-->
+			<img src="/assets/plugins/nivo-slider/demo/images/banner.jpg" alt="" class="img-responsive" />
 		</div>
 		<?php echo Component::menuBar(); ?>
 	</div>
@@ -23,16 +20,16 @@ $bangsa = Student::bangsa();
 			<div class="slider-wrapper theme-default">
 				<div id="slider" class="nivoSlider">
 					<a href="#">
-						<img src="/assets/plugins/nivo-slider/demo/images/m1.jpg" alt="" title="#htmlcaption1" />
+						<img src="/assets/plugins/nivo-slider/demo/images/m1.jpg" alt="" class="img-responsive" title="#htmlcaption1" />
 					</a>
 					<a href="#">
-						<img src="/assets/plugins/nivo-slider/demo/images/m2.jpg" alt="" title="#htmlcaption2" />
+						<img src="/assets/plugins/nivo-slider/demo/images/m2.jpg" alt="" class="img-responsive" title="#htmlcaption2" />
 					</a>
 					<a href="#">
-						<img src="/assets/plugins/nivo-slider/demo/images/m3.jpg" alt="" title="#htmlcaption3" />
+						<img src="/assets/plugins/nivo-slider/demo/images/m3.jpg" alt="" class="img-responsive" title="#htmlcaption3" />
 					</a>
 					<a href="#">
-						<img src="/assets/plugins/nivo-slider/demo/images/m4.jpg" alt="" title="#htmlcaption4" />
+						<img src="/assets/plugins/nivo-slider/demo/images/m4.jpg" alt="" class="img-responsive" title="#htmlcaption4" />
 					</a>
 				</div>
 				

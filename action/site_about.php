@@ -7,10 +7,7 @@ ob_start();
 
 <div class="text-center">
 	<div id="main-banner">
-		<br />
-		<br />
-		<br />
-		<!--<h1>Sistem Pendaftaran Latihan Mengajar</h1>-->
+		<img src="/assets/plugins/nivo-slider/demo/images/banner.jpg" alt="" class="img-responsive" />
 	</div>
 	<?php echo Component::menuBar(); ?>
 </div>
