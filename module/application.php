@@ -9,7 +9,18 @@ class Application{
 	public $tarikh_dibuat;
 	public $tarikh_kemaskini;
 	
-	public static function all( $pelajar=null, $filter=array() ){
+	public static $totalItem = 0;
+	
+	public static function all( $pelajar=null, $filter2=array() ){
+		
+		$defaultFilter = array(
+			'order' => 'permohonan.id',
+			'by' => 'DESC',
+			'limit' => 10,
+			'page' => 1
+		);
+		
+		$filter = array_merge($defaultFilter, $filter2);
 		
 		$param = array();
 		
@@ -20,20 +31,53 @@ class Application{
 		INNER JOIN subjek ON subjek.id = permohonan.id_subjek 
 		INNER JOIN pelajar ON pelajar.id = permohonan.id_pelajar 
 		WHERE 1=1";
+		$countSQL = "SELECT COUNT(*) as totalItem FROM permohonan 
+		INNER JOIN pelajar ON pelajar.id = permohonan.id_pelajar 
+		INNER JOIN sekolah ON sekolah.id = permohonan.id_sekolah 
+		WHERE 1=1";
+		$filterSQL = "";
 		
 		if( !empty( $pelajar ) ){
-			$strSQL .= " AND id_pelajar=:id_pelajar";
+			$filterSQL .= " AND id_pelajar=:id_pelajar";
 			$param[':id_pelajar'] = $pelajar;
 		}else{
 			
 		}
 		
-		if( !empty( $filter ) ){
-			if( !empty( $filter['status'] ) ){
-				$strSQL .= " AND permohonan.status=:status";
-				$param[':status'] = $filter['status'];
-			}
+		// where clause
+		if( !empty( $filter['nama_pelajar'] ) ){
+			$filterSQL .= " AND pelajar.nama_penuh=:namapelajar";
+			$param[':namapelajar'] = $filter['namapelajar'];
 		}
+		
+		if( !empty( $filter['sekolah'] ) ){
+			$filterSQL .= " AND sekolah.id=:sekolah";
+			$param[':sekolah'] = $filter['sekolah'];
+		}
+		
+		if( !empty( $filter['status'] ) ){
+			$filterSQL .= " AND permohonan.status=:status";
+			$param[':status'] = $filter['status'];
+		}
+		
+		//
+		$countSQL .= $filterSQL;
+		$statement2 = DbConn::$dbConn->prepare( $countSQL );
+		$statement2->execute( $param );
+		$rowTotalITem = $statement2->fetch(PDO::FETCH_ASSOC);
+		self::$totalItem = $rowTotalITem['totalItem'];
+		//
+		
+		// :order => ID, name etc, :by => ASC, DESC
+		if( !empty( $filter['order'] ) && !empty( $filter['by'] ) ){
+			$filterSQL .= " ORDER BY :order :by";
+			$param[':order'] = $filter['order'];
+			$param[':by'] = $filter['by'];
+		}
+		
+		$offset = ( $filter['page'] - 1 ) * $filter['limit'];
+		$filterSQL .= " LIMIT $filter[limit] OFFSET $offset";
+		$strSQL .= $filterSQL;
 		
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		$statement->execute( $param );
