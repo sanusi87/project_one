@@ -1,7 +1,49 @@
 <?php
 ob_start();
-$applications = Application::all();
-//$student = Student
+
+$filter = array();
+$url = "index.php?module=admin";
+
+if( !empty( $_REQUEST['page'] ) ){
+	$filter['page'] = (int)$_REQUEST['page'];
+	$page = $filter['page'];
+}else{
+	$page = 1;
+}
+
+// where
+if( !empty( $_REQUEST['nama_pelajar'] ) ){
+	$filter['nama_pelajar'] = trim( $_REQUEST['nama_pelajar'] );
+	$url .= "&nama_pelajar=".urlencode( $filter['nama_pelajar'] );
+}
+
+if( !empty( $_REQUEST['sekolah'] ) ){
+	$filter['sekolah'] = (int)$_REQUEST['sekolah'];
+	$url .= "&sekolah=$filter[sekolah]";
+}
+
+// order
+if( !empty( $_REQUEST['order'] ) ){
+	$filter['order'] = $_REQUEST['order'];
+	$url .= "&order=$filter[order]";
+	
+	if( !empty( $_REQUEST['by'] ) ){
+		$filter['by'] = $_REQUEST['by'];
+		$url .= "&by=$filter[by]";
+	}
+}
+
+// limit+page
+if( !empty( $_REQUEST['limit'] ) ){
+	$filter['limit'] = (int)$_REQUEST['limit'];
+	$itemPerPage = $filter['limit'];
+}else{
+	$itemPerPage = 10;
+}
+$url .= "&limit-$itemPerPage";
+
+$applications = Application::all(null, $filter);
+$senaraiSekolah = School::senaraiSekolah();
 ?>
 
 <div>
@@ -9,6 +51,44 @@ $applications = Application::all();
 		<h1>Permohonan Pelajar</h1>
 		<hr />
 	</div>
+	
+	<form action="index.php?module=admin" method="get">
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group">
+					<div class="input-group">
+						<label for="nama_pelajar" class="input-group-addon">Nama Pelajar</label>
+						<input type="text" id="nama_pelajar" name="nama_pelajar" placeholder="Nama Pelajar" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group">
+					<div class="input-group">
+						<label for="sekolah" class="input-group-addon">Sekolah</label>
+						<select name="sekolah" id="sekolah" class="form-control">
+						<?php if( !empty( $senaraiSekolah ) ){
+							foreach( $senaraiSekolah as $sekolah ){
+								if( $filter['sekolah'] == $sekolah['id'] ){
+									echo "<option value=\"$sekolah[id]\" selected=\"selected\">$sekolah[nama]</option>";
+								}else{
+									echo "<option value=\"$sekolah[id]\">$sekolah[nama]</option>";
+								}
+							}
+						} ?>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-md btn-primary">
+				Cari
+			</button>
+		</div>
+	</form>
+	
 	<?php
 	if( empty( $applications ) ){
 	?>
@@ -17,7 +97,39 @@ $applications = Application::all();
 	</div>
 	<?php
 	}else{
+		$totalItem = Application::$totalItem;
+		$totalPages = ceil( $totalItem / $itemPerPage );
+		
+		$firstPage = 1;
+		$lastPage = $totalPages;
+		
+		$distinct = 3;
+		$firstCounter = $page-$distinct <= 0 ? $firstPage : $page-$distinct;
+		$lastCounter = $page+$distinct < $lastPage ? $page+$distinct : $lastPage;
 	?>
+	<nav>
+		<ul class="pagination">
+			<li><a href="<?php echo $url."&page=$firstPage"; ?>"><?php echo $firstPage; ?></a></li>
+			<?php
+			if( $firstCounter - $firstPage > 1 ){
+				echo "<li><a href=\"#\">...</a></li>";
+			}
+			
+			for( $i=$firstCounter;$i < $lastCounter; $i++ ){
+				$currentPage = $i;
+				if( $currentPage != $firstPage && $currentPage != $lastPage ){
+					?> <li><a href="<?php echo $url."&page=$currentPage"; ?>"><?php echo $currentPage; ?></a></li> <?php
+				}
+			}
+			
+			if( $lastPage - $lastCounter >= 1 ){
+				echo "<li><a href=\"#\">...</a></li>";
+			}
+			?>
+			<li><a href="<?php echo $url."&page=$lastPage"; ?>"><?php echo $lastPage; ?></a></li>
+		</ul>
+	</nav>
+	
 	<div class="list-group">
 		<div class="list-group-item">
 			<div class="row">
@@ -34,7 +146,7 @@ $applications = Application::all();
 	?>
 		<div class="list-group-item">
 			<div class="row">
-				<div class="col-md-1 col-md-1 col-xs-1"><?php echo $i; ?></div>
+				<div class="col-md-1 col-md-1 col-xs-1"><?php echo ($itemPerPage*($page-1))+$i; ?></div>
 				<div class="col-md-4 col-md-4 col-xs-11">
 					<strong><?php echo empty( $application['nama_penuh'] ) ? $application['no_matrik'] : $application['nama_penuh']; ?></strong><br />
 					<small><?php echo $application['nama_sekolah']; ?></small><br />
