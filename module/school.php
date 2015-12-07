@@ -1,6 +1,18 @@
 <?php
 class School{
 	
+	public static function senaraiSekolah(){
+		$sekolah = array();
+		$strSQL = "SELECT sekolah.* FROM sekolah ORDER BY sekolah.nama ASC";
+		$statement = DbConn::$dbConn->query( $strSQL );
+		$statement->execute();
+		
+		while( $row = $statement->fetch(PDO::FETCH_ASSOC) ){
+			$sekolah[] = $row;
+		}
+		return $sekolah;
+	}
+	
 	public static function all(){
 		$sekolah = array();
 		$strSQL = "SELECT sekolah.*, negeri.nama as nama_negeri, bandar.nama as nama_bandar, S.id as id_permohonan FROM sekolah
