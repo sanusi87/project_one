@@ -87,6 +87,39 @@ switch( $module ){
 				}
 			}
 			include_once( ACTION.'/print_application.php' );
+		}elseif( $action == 'search' ){
+			$filter = array();
+			// where
+			if( !empty( $_REQUEST['nama_pelajar'] ) ){
+				$filter['nama_pelajar'] = $_REQUEST['nama_pelajar'];
+			}
+			
+			if( !empty( $_REQUEST['sekolah'] ) ){
+				$filter['sekolah'] = (int)$_REQUEST['sekolah'];
+			}
+			
+			// order
+			if( !empty( $_REQUEST['order'] ) ){
+				$filter['order'] = $_REQUEST['order'];
+				if( !empty( $_REQUEST['by'] ) ){
+					$filter['by'] = $_REQUEST['by'];
+				}
+			}
+			
+			// limit+offset
+			if( !empty( $_REQUEST['limit'] ) ){
+				$filter['limit'] = (int)$_REQUEST['limit'];
+			}
+			
+			if( !empty( $_REQUEST['page'] ) ){
+				$filter['page'] = (int)$_REQUEST['page'];
+			}
+			
+			$applications = Application::all(null, $filter);
+			
+			header('Content-type: Application/json');
+			echo json_encode( $applications );
+			exit;
 		}
 		break;
 	default:
