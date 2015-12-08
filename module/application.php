@@ -39,7 +39,7 @@ class Application{
 		
 		if( !empty( $pelajar ) ){
 			$filterSQL .= " AND id_pelajar=:id_pelajar";
-			$param[':id_pelajar'] = $pelajar;
+			$param[':id_pelajar'] = "%$pelajar%";
 		}else{
 			
 		}
