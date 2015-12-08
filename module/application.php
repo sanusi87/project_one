@@ -39,15 +39,15 @@ class Application{
 		
 		if( !empty( $pelajar ) ){
 			$filterSQL .= " AND id_pelajar=:id_pelajar";
-			$param[':id_pelajar'] = "%$pelajar%";
+			$param[':id_pelajar'] = $pelajar;
 		}else{
 			
 		}
 		
 		// where clause
 		if( !empty( $filter['nama_pelajar'] ) ){
-			$filterSQL .= " AND pelajar.nama_penuh=:namapelajar";
-			$param[':namapelajar'] = $filter['namapelajar'];
+			$filterSQL .= " AND pelajar.nama_penuh LIKE :namapelajar";
+			$param[':namapelajar'] = "%$filter[nama_pelajar]%";
 		}
 		
 		if( !empty( $filter['sekolah'] ) ){
@@ -78,6 +78,8 @@ class Application{
 		$offset = ( $filter['page'] - 1 ) * $filter['limit'];
 		$filterSQL .= " LIMIT $filter[limit] OFFSET $offset";
 		$strSQL .= $filterSQL;
+		// echo $strSQL;
+		// var_dump( $param );
 		
 		$statement = DbConn::$dbConn->prepare( $strSQL );
 		$statement->execute( $param );
