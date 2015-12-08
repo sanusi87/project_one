@@ -16,7 +16,7 @@ if( isset( $_POST ) && !empty( $_POST ) ){
 
 ob_start();
 $pelajar = Student::findById( $_SESSION['id_pelajar'] );
-$sekolahs = School::all();
+$sekolahs = School::senaraiSekolah();
 $application = Application::all( $_SESSION['id_pelajar'], array('status' => 1) );
 ?>
 
