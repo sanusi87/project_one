@@ -17,6 +17,11 @@ if( !empty( $_REQUEST['nama_pelajar'] ) ){
 	$url .= "&nama_pelajar=".urlencode( $filter['nama_pelajar'] );
 }
 
+if( !empty( $_REQUEST['no_matrik'] ) ){
+	$filter['no_matrik'] = trim( $_REQUEST['no_matrik'] );
+	$url .= "&no_matrik=".urlencode( $filter['no_matrik'] );
+}
+
 if( !empty( $_REQUEST['sekolah'] ) ){
 	$filter['sekolah'] = (int)$_REQUEST['sekolah'];
 	$url .= "&sekolah=$filter[sekolah]";
@@ -58,7 +63,14 @@ $senaraiSekolah = School::senaraiSekolah();
 				<div class="form-group">
 					<div class="input-group">
 						<label for="nama_pelajar" class="input-group-addon">Nama Pelajar</label>
-						<input type="text" id="nama_pelajar" name="nama_pelajar" placeholder="Nama Pelajar" class="form-control" />
+						<input type="text" id="nama_pelajar" name="nama_pelajar" placeholder="Nama Pelajar" class="form-control" value="<?php echo $filter['nama_pelajar']; ?>" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="input-group">
+						<label for="no_matrik" class="input-group-addon">No. Matrik</label>
+						<input type="text" id="no_matrik" name="no_matrik" placeholder="No. Matrik" class="form-control" value="<?php echo $filter['no_matrik']; ?>" />
 					</div>
 				</div>
 			</div>

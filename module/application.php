@@ -50,6 +50,11 @@ class Application{
 			$param[':namapelajar'] = "%$filter[nama_pelajar]%";
 		}
 		
+		if( !empty( $filter['no_matrik'] ) ){
+			$filterSQL .= " AND pelajar.no_matrik LIKE :nomatrik";
+			$param[':nomatrik'] = "%$filter[no_matrik]%";
+		}
+		
 		if( !empty( $filter['sekolah'] ) ){
 			$filterSQL .= " AND sekolah.id=:sekolah";
 			$param[':sekolah'] = $filter['sekolah'];
