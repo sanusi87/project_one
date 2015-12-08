@@ -67,6 +67,7 @@ $senaraiSekolah = School::senaraiSekolah();
 					<div class="input-group">
 						<label for="sekolah" class="input-group-addon">Sekolah</label>
 						<select name="sekolah" id="sekolah" class="form-control">
+							<option value="">--Pilih--</option>
 						<?php if( !empty( $senaraiSekolah ) ){
 							foreach( $senaraiSekolah as $sekolah ){
 								if( $filter['sekolah'] == $sekolah['id'] ){
