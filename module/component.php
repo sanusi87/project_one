@@ -1,6 +1,7 @@
 <?php
 class Component{
 	public static function menuBar(){
+		$appName = APPNAME;
 		$html = <<<HTML
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
@@ -11,10 +12,11 @@ class Component{
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
+					<span class="navbar-brand" id="custom-navbar-brand">Selamat Datang ke $appName</span>
 				</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
+					<ul class="nav navbar-nav navbar-right">
 						<li><a href="index.php">Utama</a></li>
 						<li><a href="index.php?module=site&action=about">Tentang Kami</a></li>
 						<li><a href="index.php?module=site&action=guide">Panduan</a></li>
