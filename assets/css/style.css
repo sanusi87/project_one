@@ -2,8 +2,6 @@ hr{
 	margin: 8px 0;
 }
 
-.slider-wrapper {width: 630px;}
-
 #main-content{
 	margin-top: 0px;
 }
@@ -16,15 +14,12 @@ hr{
 	padding-bottom: 8px;
 }
 
-@media (max-width: 1200px) {
-
-}
-
-@media (max-width: 992px) {
-	
-}
+@media (max-width: 1200px) {}
+@media (max-width: 992px) {}
+@media (max-width: 800px) {}
 
 @media (max-width: 768px) {
+	.slider-wrapper {width: 100%;}
 	#main-banner{
 		background-image: none;
 		height: auto;
@@ -49,5 +44,23 @@ hr{
 @media (max-width: 480px) {
 	#custom-navbar-brand{
 		font-size: 12px;
+	}
+}
+
+@media (min-width: 480px) {}
+@media (min-width: 640px) {}
+@media (min-width: 650px) {
+	.slider-wrapper {width: 100%;}
+}
+@media (min-width: 767px) {
+	.slider-wrapper {
+		margin: 0 auto;
+		width: 530px;
+	}
+}
+@media (min-width: 1200px) {
+	.slider-wrapper {
+		margin: 0 auto;
+		width: 580px;
 	}
 }
